@@ -17,21 +17,8 @@ var app = {
             $(event.target).removeClass('tappable-active');
         });
     },
-/*
-route: function() {
-    var hash = window.location.hash;
-    if (!hash) {
-        $('body').html(new HomeView(this.store).render().el);
-        return;
-    }
-    var match = hash.match(app.offersURL);
-    if (match) {
-        this.store.findById(1, function(employee) {
-            $('body').html(new OfferView(employee).render().el);
-        });
-    }
-},
- */   route: function() {
+
+    route: function() {
         var self = this;
         var hash = window.location.hash;
         if (!hash) {
@@ -43,18 +30,23 @@ route: function() {
             }
             return;
         }
-        var match = hash.match(this.detailsURL);
+        var match = hash.match(this.availabilityURL);
         if (match) {
-            this.store.findById(Number(match[1]), function(employee) {
-                self.slidePage(new EmployeeView(employee).render());
-            });
+                var availability = new AvailabilityView().render();
+                self.slidePage(availability);
+                return;
         }
-        var match1 = hash.match(this.offersURL);
-                if (match1) {
-                    this.store.findById(1, function(employee) {
-                        self.slidePage( new OfferView(employee).render());
-                    });
-                }
+        var match1 = hash.match(this.offerURL);
+        if (match1) {
+            this.store.findById(1, function(employee) {
+                self.slidePage( new OfferView(employee).render());
+            });
+            return;
+        }
+        var offersMatch = hash.match(this.offersURL);
+        if (offersMatch) {
+                self.slidePage( new OffersView().render());
+        }
     },
 
 
@@ -85,6 +77,7 @@ route: function() {
         }
 
         $('body').append(page.el);
+        page.postRender();
 
         // Wait until the new page has been added to the DOM...
         setTimeout(function() {
@@ -99,8 +92,9 @@ route: function() {
 
     initialize: function() {
         var self = this;
-        this.detailsURL = /^#employees\/(\d{1,})/;
-        this.offersURL = /^#offers\/(\d{1,})/;
+        this.availabilityURL = /^#availability/;
+        this.offersURL = /^#offers\/show/;
+        this.offerURL = /^#offers\/(\d{1,})/;
         this.registerEvents();
         this.store = new MemoryStore(function() {
             self.route();

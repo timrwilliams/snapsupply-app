@@ -1,6 +1,7 @@
 <html>
 <head>
 <script src="css/source-sans-pro.js"></script>
+<link href="css/jquery.datepick.css" rel="stylesheet">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/styles.css" rel="stylesheet">
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
@@ -13,33 +14,39 @@
 <script type="text/javascript" >
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    function onDeviceReady(){    
-    var start = new Date(2013,04,29,20,00);    
-    var timerId =            
-        countdown(                        
-            start, 
-                function(ts) {
-                if($('#pageTimer').length!=0){                        
-                    document.getElementById('pageTimer').innerHTML = ts.toString().replace(/,([^,]*)$/,'$1');
-            } else {
-                window.clearInterval(timerId);
-            }
-        },  
-    countdown.HOURS|countdown.MINUTES|countdown.SECONDS,2);
+    function onDeviceReady(){        
     }
+    
 </script>
 <script id="home-tpl" type="text/x-handlebars-template">
     <div class='header'><h1>Home</h1></div>
-    <h2 style='padding:5px'>My Offers</h2>
+    
+    <div class="container" id="buttons">
+    <a class="nav-button left" href="#offers/show">
+        <img src="img/handshake.png" alt="offers">
+        <span>my offers (1)</span>
+    </a>
+    <a class="nav-button right" href="#availability/show">
+        <img src="img/calendar-32.png" alt="availability">
+        <span>my availability</span>
+    </a>
+    </div>
+    </div>    
+</script>
 
+<script id="offers-tpl" type="text/x-handlebars-template">
+    <div class='header'><a href='#' class="button header-button header-button-left">Back</a><h1>My Offers</h1></div>
+    <div class="container">
+    <ul>
     <li style='font-size:1.2em'><a href="#offers/1">Year 5: Ferring School<span style="float:right"><i class="icon-calendar"></i> <strong>Today</strong></span><br/>
     <span id='pageStart'></span>
     <span class="muted">Offer expires in <span id='pageTimer'></span></span></a></li>
-    </ul></div>    
+    </ul>     
+    </div>    
 </script>
 
 <script id="offer-tpl" type="text/x-handlebars-template">
-    <div class='header'><a href='#' class="button header-button header-button-left">Back</a><h1>Job Details</h1></div>
+    <div class='header'><a href='#offers/show/back' class="button header-button header-button-left">Back</a><h1>Job Details</h1></div>
     <img id='image' src='img/acme.jpg' style="float:left;margin:10px;"/>
     <h1>Year 5 <teacher></teacher></h1>
     <h4 style="color:#777;">Ferring Primary School</h4>    
@@ -56,6 +63,12 @@
     </div>
 </script>
 
+<script id="availability-tpl" type="text/x-handlebars-template">
+    <div class='header'><a href='#' class="button header-button header-button-left">Back</a><h1>My Availability</h1></div>
+    <div id="multiInlinePicker">Calendar goes here</div>         
+    <div id="dateDisplay">No dates selected</div>
+</script>
+
 <script type="text/javascript">// <![CDATA[
 if (navigator.userAgent.toLowerCase().match(/android/)) {
 document.write('<script charset="utf-8" src="cordova-2.7.0-android.js"><\/script>');
@@ -63,14 +76,17 @@ document.write('<script charset="utf-8" src="cordova-2.7.0-android.js"><\/script
 else if (navigator.userAgent.toLowerCase().match(/iphone/) || navigator.userAgent.toLowerCase().match(/ipad/)) {
 document.write('<script charset="utf-8" src="cordova/cordova-2.7.0-ios.js"><\/script>');
 }
-// ]]></script>
+// ]]>
+    </script>
 <script src="lib/jquery-1.8.2.min.js"></script>
+<script src="lib/jquery.datepick.js"></script>
 <script src="lib/countdown.min.js"></script>
 <script src="lib/handlebars.js"></script>
 <script src="js/storage/memory-store.js"></script>
 <script src="js/HomeView.js"></script>
-<script src="js/EmployeeView.js"></script>
 <script src="js/OfferView.js"></script>
+<script src="js/OffersView.js"></script>
+<script src="js/AvailabilityView.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

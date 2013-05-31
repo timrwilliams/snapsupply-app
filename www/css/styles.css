@@ -11,6 +11,7 @@ body {
     background-color: #fff;
     overflow: hidden;
     position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .header {
@@ -220,4 +221,43 @@ li>a.tappable-active {
     -moz-transition-duration: .375s;
     -webkit-transition-duration: .375s;
     -o-transition-duration: .375s;
+}
+
+element.style {
+}
+
+.container {
+    padding:5%;
+}
+
+.nav-button, .nav-button:visited {
+display: block;
+float: left;
+width: 48%;
+background-color: #08C;
+color: white;
+padding: 5% 0;
+text-align: center;
+-moz-border-radius: 7px;
+-webkit-border-radius: 7px;
+border-radius: 7px;
+margin: 0 0 10px;
+text-decoration: none;
+font-weight: bold;
+}
+
+#buttons {
+    margin: 0 0 70px;
+}
+
+#buttons .right {
+    margin-left: 4%;
+}
+
+.nav-button span {
+    display: block;
+}
+
+.nav-button img {
+    padding:10px;
 }

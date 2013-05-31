@@ -22,14 +22,18 @@ var OfferView = function(employee) {
         showConfirm('Reject');
         return false;
     };
+
+    this.postRender = function(){
+    };
+
     this.initialize();
 
 }
 
 OfferView.template = Handlebars.compile($("#offer-tpl").html());
 // process the confirmation dialog result
-function onButton(button) {
-        alert('You selected button ' + button);
+    function onButton(button) {
+        //alert('You selected button ' + button);
     };
 
    function showConfirm(msg) {

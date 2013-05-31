@@ -18,6 +18,7 @@ android/bin/
 android/gen/
 android/assets/
 android/.idea/
+android/*.iml
 
 # generated files
 bin/

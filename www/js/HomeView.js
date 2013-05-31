@@ -10,6 +10,9 @@ var HomeView = function(store) {
         return this;
     };
 
+	this.postRender = function(){
+	};
+	
     this.initialize();
 
 }
