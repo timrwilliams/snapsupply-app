@@ -58,10 +58,10 @@
 }
 /*.datepick-cmd:hover {
 	background-color: #777;
-}*/
+}
 .datepick-ctrl .datepick-cmd:hover {
 	background-color: #f08080;
-}
+}*/
 .datepick-cmd-prevJump, .datepick-cmd-nextJump {
 	width: a%;
 }
@@ -198,12 +198,44 @@ button.datepick-cmd {
 .datepick-month td .datepick-today {
 	background-color: #f0c0c0;
 }
-.datepick-month td .datepick-highlight {
+/*.datepick-month td .datepick-highlight {
 	background-color: #f08080;
-}
+}*/
 .datepick-month td .datepick-selected {
-	background-color: #777;
+	background-color: red;
 	color: #fff;
+}
+.datepick-month td .datepick-hired {
+	background-color: blue;
+	color: #fff;
+}
+
+.availability-container{
+	margin:5%;
+}
+
+.availability-key{
+	width:100%;
+	color:white;
+	text-align:center;
+}
+.availability-key td.key-cell{
+	color:white;
+	text-align:center;
+}
+
+.availability-key td.available{
+	background-color: #eee;
+	color:black;
+	width:33%;
+}
+.hired{
+	background-color: blue;
+	width:33%;
+}
+.unavailable{
+	background-color: red;
+	width:33%;
 }
 .datepick-month th.datepick-week {
 	background-color: #777;

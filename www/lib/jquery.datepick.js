@@ -51,6 +51,7 @@ function Datepicker() {
 		onShow: null, // Callback just before a datepicker is shown
 		onChangeMonthYear: null, // Callback when a new month/year is selected
 		onSelect: null, // Callback when a date is selected
+		onMultiSelect: null, // Callback when an individual date is selected in a multi date picker
 		onClose: null, // Callback when a datepicker is closed
 		altField: null, // Alternate field to update in synch with the datepicker
 		altFormat: null, // Date format for alternate field, defaults to dateFormat
@@ -1180,6 +1181,15 @@ $.extend(Datepicker.prototype, {
 		}
 	},
 
+    _multiUpdate: function(target,direction, date ){
+        var inst = $.data(target, this.propertyName);
+        if ($.isFunction(inst.options.onMultiSelect) && !inst.inMultiSelect) {
+            inst.inMultiSelect = true; // Prevent endless loops
+    	    inst.options.onMultiSelect.apply(target, [direction, date]);
+    	    inst.inMultiSelect = false;
+        }
+    },
+
 	/* Retrieve the size of left and top borders for an element.
 	   @param  elem  (jQuery) the element of interest
 	   @return  (number[2]) the left and top borders */
@@ -1485,7 +1495,8 @@ $.extend(Datepicker.prototype, {
 			}
 			var minDate = inst.get('minDate');
 			var maxDate = inst.get('maxDate');
-			var curDate = inst.selectedDates[0];
+			//var curDate = inst.selectedDates[0];
+			var curDate = plugin.today();
 			inst.selectedDates = [];
 			for (var i = 0; i < dates.length; i++) {
 				var date = plugin.determineDate(
@@ -1518,8 +1529,7 @@ $.extend(Datepicker.prototype, {
 				inst.pickingRange = false;
 			}
 			inst.prevDate = (inst.drawDate ? plugin.newDate(inst.drawDate) : null);
-			inst.drawDate = this._checkMinMax(plugin.newDate(inst.selectedDates[0] ||
-				inst.get('defaultDate') || plugin.today()), inst);
+			inst.drawDate = this._checkMinMax(plugin.today(), inst);
 			if (!setOpt) {
 				this._update(target);
 				this._updateInput(target, keyUp);
@@ -1645,11 +1655,13 @@ $.extend(Datepicker.prototype, {
 					if (date.getTime() == inst.selectedDates[i].getTime()) {
 						inst.selectedDates.splice(i, 1);
 						found = true;
+						this._multiUpdate(target,"REMOVE",date);
 						break;
 					}
 				}
 				if (!found && inst.selectedDates.length < inst.options.multiSelect) {
 					inst.selectedDates.push(date);
+					this._multiUpdate(target,"ADD",date);
 				}
 			}
 			else if (inst.options.rangeSelect) {

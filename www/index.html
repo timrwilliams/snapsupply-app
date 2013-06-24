@@ -4,8 +4,6 @@
 <link href="css/jquery.datepick.css" rel="stylesheet">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/styles.css" rel="stylesheet">
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 
 </head>
@@ -17,6 +15,22 @@
     function onDeviceReady(){        
     }
     
+</script>
+<script id="login-tpl" type="text/x-handlebars-template">
+    <div class="container">
+    <div class="alert alert-error" style="display:none;">
+        There was an error with your username/password combination. Please try again.
+    </div>
+    <form id="login_form">
+			<p>
+				<input type="email" name="email" placeholder="email" value="tim@teachmatic.com" />
+			</p>
+			<p>
+				<input type="password" name="password" placeholder="Password" value="12345678" />
+			</p>
+			<a href="#" id="login_button" data-loading-text="Signing in..." class="login-btn btn btn-success">Login</a>
+		</form>
+    </div>
 </script>
 <script id="home-tpl" type="text/x-handlebars-template">
     <div class='header'><h1>Home</h1></div>
@@ -38,9 +52,10 @@
     <div class='header'><a href='#' class="button header-button header-button-left">Back</a><h1>My Offers</h1></div>
     <div class="container">
     <ul>
-    <li style='font-size:1.2em'><a href="#offers/1">Year 5: Ferring School<span style="float:right"><i class="icon-calendar"></i> <strong>Today</strong></span><br/>
-    <span id='pageStart'></span>
-    <span class="muted">Offer expires in <span id='pageTimer'></span></span></a></li>
+    <li style='font-size:1.2em'><a href="#offers/1" style="display:block">Year 5: Ferring School<span style="float:right"><i class="icon-calendar"></i> <strong>Today</strong></span><br/>
+    <span class="muted">Offer expires in <span id='pageTimer'></span></span>
+    </a>
+    </li>
     </ul>     
     </div>    
 </script>
@@ -52,7 +67,7 @@
     <h4 style="color:#777;">Ferring Primary School</h4>    
     <ul>
     <li style='padding-left:5px;padding-top:5px;padding-left:5px'><img id='cal-img' src='img/calendar.png'/><strong style='padding-left:10px;'>Today</strong></li>
-    <li><a href="geo:-34.397, 150.644">View on map<br/><i class='icon-map-marker'></i>123 Broadwalk, Ferring, West Sussex</a></li>
+    <li><a href="https://maps.google.co.uk/maps?q=ferring+c+of+e+primary+school&hl=en&ll=50.813762,-0.442758&z=15">View on map<br/><i class='icon-map-marker'></i>123 Broadwalk, Ferring, West Sussex</a></li>
     <li><a href="tel:{{officePhone}}">Call Agency<br/>{{officePhone}}</a></li>
     </ul>
     <div class="btn-toolbar pagination-centered">
@@ -65,8 +80,12 @@
 
 <script id="availability-tpl" type="text/x-handlebars-template">
     <div class='header'><a href='#' class="button header-button header-button-left">Back</a><h1>My Availability</h1></div>
+    <div id="calendar_status" style="height:1em;margin-bottom:1em;">Calendar up-to-date</div>
     <div id="multiInlinePicker">Calendar goes here</div>         
-    <div id="dateDisplay">No dates selected</div>
+    <div id="dateDisplay" class="availability-container well">
+        <p>Tap date to change your availability.</p>
+        <table class="table-bordered table availability-key"><tr style="width:90%"><td class="available key-cell">Available</td><td class="hired key-cell">Hired</td><td class="unavailable key-cell">Unavailable</td></tr></table>
+    </div>
 </script>
 
 <script type="text/javascript">// <![CDATA[
@@ -80,9 +99,11 @@ document.write('<script charset="utf-8" src="cordova/cordova-2.7.0-ios.js"><\/sc
     </script>
 <script src="lib/jquery-1.8.2.min.js"></script>
 <script src="lib/jquery.datepick.js"></script>
+<script src="lib/bootstrap.min.js"></script>
 <script src="lib/countdown.min.js"></script>
 <script src="lib/handlebars.js"></script>
 <script src="js/storage/memory-store.js"></script>
+<script src="js/LoginView.js"></script>
 <script src="js/HomeView.js"></script>
 <script src="js/OfferView.js"></script>
 <script src="js/OffersView.js"></script>

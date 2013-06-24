@@ -21,6 +21,12 @@ var app = {
     route: function() {
         var self = this;
         var hash = window.location.hash;
+        console.log("Auth token: "+localStorage.getItem('auth_token'));
+        if(!localStorage.getItem('auth_token')) {
+            this.loginPage = new LoginView().render();
+            this.slidePage(this.loginPage);
+            return;
+        }
         if (!hash) {
             if (this.homePage) {
                 this.slidePage(this.homePage);
@@ -49,8 +55,7 @@ var app = {
         }
     },
 
-
-    slidePage: function(page) {
+    slidePage: function(page,forward) {
 
         var currentPageDest,
             self = this;
