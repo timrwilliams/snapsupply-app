@@ -19,6 +19,7 @@ android/gen/
 android/assets/
 android/.idea/
 android/*.iml
+android/out/
 
 # generated files
 bin/
@@ -53,3 +54,7 @@ IOS/www/
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+# Ignore SublimeText meta files
+*.sublime-project
+*.sublime-workspace
