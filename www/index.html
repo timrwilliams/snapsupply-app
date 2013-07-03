@@ -4,6 +4,7 @@
 <link href="css/jquery.datepick.css" rel="stylesheet">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/styles.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 
 </head>
@@ -80,8 +81,12 @@
 
 <script id="availability-tpl" type="text/x-handlebars-template">
     <div class='header'><a href='#' class="button header-button header-button-left">Back</a><h1>My Availability</h1></div>
-    <div id="calendar_status" style="text-align:right;height:1em;padding-right:1em;padding-bottom:0.5em;padding-top:0.5em;">Calendar up-to-date</div>
-    <div id="multiInlinePicker">Calendar goes here</div>         
+    <div id="calendar_status" class="alert fade" style="text-align:left;margin-bottom:0px">Calendar up-to-date</div>
+    <div id="multiInlinePicker">Loading your calendar...</div>            
+    <div class="row-fluid pagination-centered" style="margin-top:1em;">
+        <button  id="sync" type="button" class="offset4 span2 btn btn-large btn-primary" data-loading-text="<i class='icon-spinner icon-spin icon-large'></i> Syncing..."><i class="icon-refresh icon-white icon-large"></i> Sync</button>
+        <button  id="cal-cancel-changes" type="button" class="span2 btn btn-large">Cancel</button>
+        </div>   
     <div id="dateDisplay" class="availability-container well">
         <p>Tap date to change your availability.</p>
         <table class="table-bordered table availability-key"><tr style="width:90%"><td class="available key-cell">Available</td><td class="hired key-cell">Hired</td><td class="unavailable key-cell">Unavailable</td></tr></table>
@@ -102,6 +107,7 @@ document.write('<script charset="utf-8" src="cordova/cordova-2.7.0-ios.js"><\/sc
 <script src="lib/bootstrap.min.js"></script>
 <script src="lib/countdown.min.js"></script>
 <script src="lib/handlebars.js"></script>
+<script src="lib/moment.min.js"></script>
 <script src="js/storage/memory-store.js"></script>
 <script src="js/LoginView.js"></script>
 <script src="js/HomeView.js"></script>

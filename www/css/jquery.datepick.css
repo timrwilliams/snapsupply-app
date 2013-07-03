@@ -43,7 +43,7 @@
 .datepick-nav, .datepick-ctrl {
 	float: left;
 	width: 100%;
-	background-color: #000;
+	background-color: #1ABC9C;
 	color: #fff;
 	font-size: 1.5em;
 	font-weight: bold;
@@ -211,7 +211,10 @@ button.datepick-cmd {
 }
 
 .availability-container{
-	margin:5%;
+	margin-top:1em;
+	margin-left:5%;
+	margin-right:5%;
+	margin-bottom:1em;
 }
 
 .availability-key{
