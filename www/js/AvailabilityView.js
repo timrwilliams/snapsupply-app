@@ -1,8 +1,8 @@
     var selectedDates = new Array();
     var LS_CALENDAR_KEY = 'calendar.dates';
     var LS_PENDING_KEY = 'calendar.pending';
-    var baseUrl = "http://localhost:3000";
-    //var baseUrl = "http://snapsupply.herokuapp.com";
+    //var baseUrl = "http://localhost:3000";
+    var baseUrl = "http://snapsupply.herokuapp.com";
 
 var AvailabilityView = function() {
 
