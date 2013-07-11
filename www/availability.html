@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+   </head>
+   <body>
+      <div  data-theme="a" id="availability-page" data-role="page">
+         <header data-role="header">
+            <a href="#" data-icon="back" data-iconpos="notext" data-rel="back" title="Go back">Back</a>
+            <h1>My Availability</h1>
+         </header>
+             <div id="calendar_status" class="alert fade" style="text-align:left;margin-bottom:0px">Calendar up-to-date</div>
+            <div id="multiInlinePicker">Loading your calendar...</div>            
+            <div class="ui-grid-a">
+               <div class="ui-block-a"><a href="#" id="cancel_button" data-theme="c" data-loading-text="Signing in..." data-role="button">Cancel</a></div>
+               <div class="ui-block-b"><a href="#" id="save_button" data-theme="b" data-loading-text="Signing in..." data-role="button" data-icon="refresh">Save</a></div>    
+         </div>            
+    <div id="dateDisplay" class="availability-container well">
+        <p>Tap date to change your availability.</p>
+        <table class="table-bordered table availability-key"><tr style="width:90%"><td class="available key-cell">Available</td><td class="hired key-cell">Hired</td><td class="unavailable key-cell">Unavailable</td></tr></table>
+    </div>
+    </div>
+   </body>
+</html>

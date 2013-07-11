@@ -1,119 +1,168 @@
 <html>
 <head>
-<script src="css/source-sans-pro.js"></script>
-<link href="css/jquery.datepick.css" rel="stylesheet">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/styles.css" rel="stylesheet">
-<link href="css/font-awesome.min.css" rel="stylesheet">
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <script src="css/source-sans-pro.js"></script>
+    <link href="css/jquery.datepick.css" rel="stylesheet">
 
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/jquery.mobile-1.3.1.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8">
 </head>
 <body>
-
-<script type="text/javascript" >
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    function onDeviceReady(){        
-    }
-    
-</script>
-<script id="login-tpl" type="text/x-handlebars-template">
-    <div class="container">
-    <div class="alert alert-error" style="display:none;">
-        There was an error with your username/password combination. Please try again.
+    <div data-theme="a" data-role="page" id="home">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <h1>
+            My Supply
+        </h1>
     </div>
-    <form id="login_form">
-			<p>
-				<input type="email" name="email" placeholder="email" value="tim@teachmatic.com" />
-			</p>
-			<p>
-				<input type="password" name="password" placeholder="Password" value="12345678" />
-			</p>
-			<a href="#" id="login_button" data-loading-text="Signing in..." class="login-btn btn btn-success">Login</a>
-		</form>
+    <div data-role="content">
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="c">
+                <a href="availability.html" data-transition="none">
+                    My Availability
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="timesheets.html" data-transition="none">
+                    My Timesheets
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="create-timesheet.html" data-transition="slide">
+                    Create Timesheet
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#home" data-transition="slide">
+                    Settings
+                </a>
+            </li>
+        </ul>
     </div>
-</script>
-<script id="home-tpl" type="text/x-handlebars-template">
-    <div class='header'><h1>Home</h1></div>
-    
-    <div class="container" id="buttons">
-    <a class="nav-button left" href="#offers/show">
-        <img src="img/handshake.png" alt="offers">
-        <span>my offers (1)</span>
-    </a>
-    <a class="nav-button right" href="#availability/show">
-        <img src="img/calendar-32.png" alt="availability">
-        <span>my availability</span>
-    </a>
-    </div>
-    </div>    
-</script>
-
-<script id="offers-tpl" type="text/x-handlebars-template">
-    <div class='header'><a href='#' class="button header-button header-button-left">Back</a><h1>My Offers</h1></div>
-    <div class="container">
-    <ul>
-    <li style='font-size:1.2em'><a href="#offers/1" style="display:block">Year 5: Ferring School<span style="float:right"><i class="icon-calendar"></i> <strong>Today</strong></span><br/>
-    <span class="muted">Offer expires in <span id='pageTimer'></span></span>
-    </a>
-    </li>
-    </ul>     
-    </div>    
-</script>
-
-<script id="offer-tpl" type="text/x-handlebars-template">
-    <div class='header'><a href='#offers/show/back' class="button header-button header-button-left">Back</a><h1>Job Details</h1></div>
-    <img id='image' src='img/acme.jpg' style="float:left;margin:10px;"/>
-    <h1>Year 5 <teacher></teacher></h1>
-    <h4 style="color:#777;">Ferring Primary School</h4>    
-    <ul>
-    <li style='padding-left:5px;padding-top:5px;padding-left:5px'><img id='cal-img' src='img/calendar.png'/><strong style='padding-left:10px;'>Today</strong></li>
-    <li><a href="https://maps.google.co.uk/maps?q=ferring+c+of+e+primary+school&hl=en&ll=50.813762,-0.442758&z=15">View on map<br/><i class='icon-map-marker'></i>123 Broadwalk, Ferring, West Sussex</a></li>
-    <li><a href="tel:{{officePhone}}">Call Agency<br/>{{officePhone}}</a></li>
-    </ul>
-    <div class="btn-toolbar pagination-centered">
-    <div class="btn-group row-fluid" >
-        <a href='#' class="span4 accept-btn btn btn-success">Accept</a>
-        <a href='#' class="span4 reject-btn btn btn-danger">Reject</a>
-    </div>
-    </div>
-</script>
-
-<script id="availability-tpl" type="text/x-handlebars-template">
-    <div class='header'><a href='#' class="button header-button header-button-left">Back</a><h1>My Availability</h1></div>
-    <div id="calendar_status" class="alert fade" style="text-align:left;margin-bottom:0px">Calendar up-to-date</div>
-    <div id="multiInlinePicker">Loading your calendar...</div>            
-    <div class="row-fluid pagination-centered" style="margin-top:1em;">
-        <button  id="sync" type="button" class="offset4 span2 btn btn-large btn-primary" data-loading-text="<i class='icon-spinner icon-spin icon-large'></i> Syncing..."><i class="icon-refresh icon-white icon-large"></i> Sync</button>
-        <button  id="cal-cancel-changes" type="button" class="span2 btn btn-large">Cancel</button>
-        </div>   
-    <div id="dateDisplay" class="availability-container well">
-        <p>Tap date to change your availability.</p>
-        <table class="table-bordered table availability-key"><tr style="width:90%"><td class="available key-cell">Available</td><td class="hired key-cell">Hired</td><td class="unavailable key-cell">Unavailable</td></tr></table>
-    </div>
-</script>
-
+</div>
 <script type="text/javascript">// <![CDATA[
 if (navigator.userAgent.toLowerCase().match(/android/)) {
-document.write('<script charset="utf-8" src="cordova-2.7.0-android.js"><\/script>');
+    document.write('<script charset="utf-8" src="cordova-2.7.0-android.js"><\/script>');
 }
 else if (navigator.userAgent.toLowerCase().match(/iphone/) || navigator.userAgent.toLowerCase().match(/ipad/)) {
-document.write('<script charset="utf-8" src="cordova/cordova-2.7.0-ios.js"><\/script>');
+    document.write('<script charset="utf-8" src="cordova/cordova-2.7.0-ios.js"><\/script>');
 }
 // ]]>
-    </script>
+</script>
 <script src="lib/jquery-1.8.2.min.js"></script>
+<script>
+$(document).bind("mobileinit", function(){
+  $.mobile.defaultPageTransition = 'none';
+});
+</script>
+<script src="lib/jquery.mobile-1.3.1.min.js"></script>
 <script src="lib/jquery.datepick.js"></script>
 <script src="lib/bootstrap.min.js"></script>
 <script src="lib/countdown.min.js"></script>
-<script src="lib/handlebars.js"></script>
 <script src="lib/moment.min.js"></script>
-<script src="js/storage/memory-store.js"></script>
 <script src="js/LoginView.js"></script>
-<script src="js/HomeView.js"></script>
-<script src="js/OfferView.js"></script>
-<script src="js/OffersView.js"></script>
 <script src="js/AvailabilityView.js"></script>
-<script src="js/main.js"></script>
+
+<script type="text/javascript">
+/**
+ * @author: Chris Hjorth, www.chrishjorth.com
+ */
+ var jqmReady = $.Deferred();
+ var pgReady = $.Deferred();
+ var browser = false;
+ var tsForm = { selectedLa: null }
+ var app = {
+   //Callback for when the app is ready
+   callback: null,
+   // Application Constructor
+   initialize: function(callback) {
+      this.callback = callback;
+      browser = document.URL.match(/^https?:/);
+      if(browser) {
+       console.log("Is web.");
+         //In case of web we ignore PG but resolve the Deferred Object to trigger initialization
+         pgReady.resolve();
+     }
+     else {
+       console.log("Is not web.");
+       this.bindEvents();
+   }
+},
+bindEvents: function() {
+  document.addEventListener('deviceready', this.onDeviceReady, false);
+},
+onDeviceReady: function() {
+      // The scope of 'this' is the event, hence we need to use app.
+      app.receivedEvent('deviceready');
+  },
+  receivedEvent: function(event) {
+      switch(event) {
+       case 'deviceready':
+       pgReady.resolve();
+       break;
+   }
+}
+};
+$(document).on("pageinit", function(event, ui) {
+ jqmReady.resolve();
+});
+/**
+ * General initialization.
+ */
+ $.when(jqmReady, pgReady).then(function() {
+   //Initialization code here
+   if(app.callback) {
+      app.callback();
+  }
+  console.log("Frameworks ready.");   
+
+});
+ $( document ).delegate("#home", "pageinit", function() {    
+    if(!new LoginHelper().isLoggedIn()){
+        console.log("Redirecting to login page");  
+        /*if(browser){
+            $('#hidden-home-link').show();    
+        }
+        else{*/
+            $.mobile.changePage("login.html", { reverse: false, changeHash: false,transition: "fade"});
+        //}        
+    } 
+    else{
+        console.log("Showing login");
+        $('#login-container').show();
+    }   
+});
+ $( document ).delegate("#login-page", "pageinit", function() {
+    var login = new LoginView();
+    login.postRender();
+});
+ $( document ).delegate("#availability-page", "pageinit", function() {
+    var availability = new AvailabilityView();
+    availability.postRender();
+});
+ $(document).delegate( "#select-la-widget","pageinit",  function( e ) {
+    $('#la-list a').on('click', function(e) {
+        e.preventDefault();
+        var selectedLa = this.text;
+        tsForm.selectedLa = this.text
+        $.mobile.changePage('create-timesheet.html', {
+          reverse: false, changeHash: false,transition: "none",
+            data: {
+                la: selectedLa
+            }
+        });
+    });
+});
+ $(document).delegate( "#create-timesheet-page","pageinit",  function( e ) {
+  $(document).delegate( "#la-select","focus",  function( e ) {  
+      $.mobile.changePage("select-la.html", { reverse: false, changeHash: false,transition: "none"});
+  });
+});
+ app.initialize(function() {
+
+ });
+ </script>
+
 </body>
 </html>

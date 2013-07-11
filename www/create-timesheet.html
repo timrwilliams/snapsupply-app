@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div data-theme="a" id="create-timesheet-page" data-role="page">
+   <header data-role="header">
+    <a href="#" data-icon="back" data-iconpos="notext" data-rel="back" title="Go back">Back</a>
+    <h1>Create Timesheet</h1>
+  </header>
+  <div data-role="content">
+   <form id="create-ts-form">
+   <div data-role="fieldcontain">
+    <label for="la">Local Authority:</label>
+    <input data-theme="b" type="text" name="la" id="la-select"/>
+  </div>      
+  <div data-role="fieldcontain">
+    <label for="school">School:</label>
+    <input data-theme="b" type="text" name="school" id="school-select"/>
+  </div>      
+</form>
+<script>
+  $('#la-select').val(tsForm.selectedLa);
+  $('#school-select').val(tsForm.selectedSchool);
+</script>
+</div>
+</div>
+</body>
+</html>

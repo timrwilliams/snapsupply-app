@@ -8,19 +8,18 @@ var AvailabilityView = function() {
 
     this.initialize = function() {
         // Define a div wrapper for the view. The div wrapper is used to attach events.
-        this.el = $('<div/>');
-        this.el.on('click', '#sync', this.onSync);
-        this.el.on('click', '#cal-cancel-changes', this.onCancel);
+         $( "#save_button" ).bind( "click", this.onSync);
+         $( "#cancel_button" ).bind( "click", this.onCancel);
         initLocalStorage();
     };
     
-    this.onSync = function(event) {
+    this.onSync = function(event,ui) {
         event.preventDefault();
         sync();
         return false;
     };
 
-    this.onCancel = function(event) {
+    this.onCancel = function(event,ui) {
         event.preventDefault();
         cancelChanges();
         return false;
@@ -34,14 +33,14 @@ var AvailabilityView = function() {
 	this.postRender = function(){
     	$('#multiInlinePicker').datepick({ 
         	defaultDate:null,multiSelect: 99, monthsToShow: 1, monthsToStep: 1,
-        	onMultiSelect:onDateChange, yearRange: '-1:+1'});
+        	onMultiSelect:onDateChange, yearRange: '-1:+1',changeMonth: false,
+            prevText:'<', nextText:'>'});
 
         dateSync();
         setCalendarFromStorage();
         
     	$('#multiInlinePicker').datepick({defaultDate: null});
     };
-        
 
 	this.initialize();
 }
@@ -108,59 +107,6 @@ var AvailabilityView = function() {
     
     };
 
-    /*
-    function  saveDateChange(date) {
-        console.log("Sending data to server");
-        dateStr = date.toJSON().substring(0,10);
-        $.ajax({
-            url: baseUrl+'/diaries/2/diary_entries/create.jsonp',
-            dataType: 'jsonp',
-            jsonp: 'callback',
-            crossDomain: true,
-            timeout: 25000,
-            data : {
-                 auth_token : localStorage.getItem('auth_token'),
-                 diary_entry : {
-                    date: dateStr,
-                    entry_type:1
-                 }
-             },
-            success: function(data, status) {
-               $('#calendar_status').text("Changes saved");
-               console.log("succesfully saved");
-            },
-            error: function(){
-            	alert('Oh no! not again.');
-            }
-        });
-    };
-
-    function  saveDateRemoval(date) {
-            console.log("Sending removal data to server");
-            dateStr = date.toJSON().substring(0,10);
-            $.ajax({
-                url: baseUrl+'/diaries/2/diary_entries/destroy.jsonp',
-                dataType: 'jsonp',
-                jsonp: 'callback',
-                crossDomain: true,
-                timeout: 25000,
-                data : {
-                     auth_token : localStorage.getItem('auth_token'),
-                     diary_entry : {
-                        date: dateStr,
-                        entry_type:1
-                     }
-                 },
-                success: function(data, status) {
-                   $('#calendar_status').text("Changes saved");
-                   console.log("Destroy successfully saved");
-                },
-                error: function(){
-                	alert('Oh no! not again.');
-                }
-            });
-        };
-*/
     function localDateSave(direction,date){        
         diaryEntry = new DiaryEntry(direction,date);
         pendingChanges = JSON.parse(localStorage.getItem(LS_PENDING_KEY));        
@@ -409,7 +355,3 @@ var AvailabilityView = function() {
         $('#calendar_status').addClass('in');         
         $('#calendar_status').text("Changes cleared");
     };
-
-
-
-AvailabilityView.template = Handlebars.compile($("#availability-tpl").html());
