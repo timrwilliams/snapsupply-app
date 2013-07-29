@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div data-theme="a" id="timesheet-create-page" data-role="page">
+   <header data-role="header">
+    <a href="#" data-icon="back" data-iconpos="notext" data-rel="back" title="Go back">Back</a>
+    <h1>Create Timesheet</h1>
+  </header>
+  <div data-role="content">
+   <form id="create-ts-form">
+    <div data-role="fieldcontain">
+      <label for="school">School:</label>
+      <input data-theme="b" type="text" name="school" id="school-select"/>
+    </div>
+    <div data-role="fieldcontain">
+      <label for="select-choice-1" class="select">Week:</label>
+      <select data-theme="b" name="select-choice-1" id="select-choice-1">
+        <option value="standard">June 30 - July 06</option>
+        <option value="rush">June 23 - June 29</option>
+        <option value="express">June 16 - June 22</option>
+        <option value="overnight">June 09 - June 15</option>
+      </select>
+    </div>
+
+    <div data-role="fieldcontain">
+      <fieldset data-theme="b"  data-role="controlgroup" data-type="horizontal">
+        <legend>Timesheet Type:</legend>
+        <input data-theme="b"  type="radio" name="radio-view" id="ts-hourly-radio" value="hourly"  />
+        <label for="ts-hourly-radio">Hourly</label>
+        <input data-theme="b"  type="radio" name="radio-view" id="ts-weekly-radio" value="weekly"  />
+        <label for="ts-weekly-radio">Weekly</label>
+      </fieldset>
+    </div>       
+
+    <div class="ui-grid-a">
+      <div class="ui-block-a"><a href="#" id="ts-cancel-btn" data-theme="c" data-role="button" data-icon="delete">Cancel</a></div>
+     <div class="ui-block-b"><a href="#" id="ts-create-btn" data-theme="b" data-role="button" data-icon="plus">Create</a></div>    
+   </div>        
+ </form>
+ <script>
+    $('#la-select').val(tsForm.selectedLa);
+    $('#school-select').val(tsForm.selectedSchool);
+    var radioId = '#'+tsForm.typeId;
+    $(radioId).attr('checked', 'checked');
+ </script>
+</div>
+</div>
+</body>
+</html>

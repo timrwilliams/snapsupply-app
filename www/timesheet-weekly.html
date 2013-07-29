@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div data-theme="a" id="timesheet-weekly-page" data-role="page">
+   <header data-role="header">
+    <a href="#" data-icon="back" data-iconpos="notext" data-rel="back" title="Go back">Back</a>
+    <h1>Enter Days</h1>
+  </header>
+  <div data-role="content">
+  <div class="ts-info">
+    <ul data-role="listview">
+      <li>
+        <h3>Ferring Primary School, Ferring</h3>
+        <p><strong>June 30 - July 06</strong></p>
+      </li>      
+    </ul>
+  </div>
+   <form id="create-ts-form">
+     
+     <div data-role="fieldcontain">
+      <fieldset data-theme="c"  data-role="controlgroup" data-type="horizontal">
+        <legend>Monday</legend>
+        <input data-theme="c"  type="radio" name="radio-mon" id="ts-mon-full-radio" value="full"  />
+        <label for="ts-mon-full-radio">Full</label>
+        <input data-theme="c"  type="radio" name="radio-mon" id="ts-mon-am-radio" value="am"  />
+        <label for="ts-mon-am-radio">AM</label>
+        <input data-theme="c"  type="radio" name="radio-mon" id="ts-mon-pm-radio" value="pm"  />
+        <label for="ts-mon-pm-radio">PM</label>                
+        <a href="#" data-theme="c" id="radio-mon" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Delete</a>
+      </fieldset>      
+    </div>      
+
+    <div data-role="fieldcontain">
+      <fieldset data-theme="c"  data-role="controlgroup" data-type="horizontal">
+        <legend>Tuesday</legend>
+        <input data-theme="c"  type="radio" name="radio-tue" id="ts-tue-full-radio" value="full"  />
+        <label for="ts-tue-full-radio">Full</label>
+        <input data-theme="c"  type="radio" name="radio-tue" id="ts-tue-am-radio" value="am"  />
+        <label for="ts-tue-am-radio">AM</label>
+        <input data-theme="c"  type="radio" name="radio-tue" id="ts-tue-pm-radio" value="pm"  />
+        <label for="ts-tue-pm-radio">PM</label>                
+        <a href="#" data-theme="c" id="radio-tue" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Delete</a>
+      </fieldset>      
+    </div> 
+
+ <div data-role="fieldcontain">
+      <fieldset data-theme="c"  data-role="controlgroup" data-type="horizontal">
+        <legend>Wednesday</legend>
+        <input data-theme="c"  type="radio" name="radio-wed" id="ts-wed-full-radio" value="full"  />
+        <label for="ts-wed-full-radio">Full</label>
+        <input data-theme="c"  type="radio" name="radio-wed" id="ts-wed-am-radio" value="am"  />
+        <label for="ts-wed-am-radio">AM</label>
+        <input data-theme="c"  type="radio" name="radio-wed" id="ts-wed-pm-radio" value="pm"  />
+        <label for="ts-wed-pm-radio">PM</label>                
+        <a href="#" data-theme="c" id="radio-wed" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Delete</a>
+      </fieldset>      
+    </div> 
+
+    <div data-role="fieldcontain">
+      <fieldset data-theme="c"  data-role="controlgroup" data-type="horizontal">
+        <legend>Thursday</legend>
+        <input data-theme="c"  type="radio" name="radio-thu" id="ts-thu-full-radio" value="full"  />
+        <label for="ts-thu-full-radio">Full</label>
+        <input data-theme="c"  type="radio" name="radio-thu" id="ts-thu-am-radio" value="am"  />
+        <label for="ts-thu-am-radio">AM</label>
+        <input data-theme="c"  type="radio" name="radio-thu" id="ts-thu-pm-radio" value="pm"  />
+        <label for="ts-thu-pm-radio">PM</label>                
+        <a href="#" data-theme="c" id="radio-thu" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Delete</a>
+      </fieldset>      
+    </div> 
+
+    <div data-role="fieldcontain">
+      <fieldset data-theme="c"  data-role="controlgroup" data-type="horizontal">
+        <legend>Friday</legend>
+        <input data-theme="c"  type="radio" name="radio-fri" id="ts-fri-full-radio" value="full"  />
+        <label for="ts-fri-full-radio">Full</label>
+        <input data-theme="c"  type="radio" name="radio-fri" id="ts-fri-am-radio" value="am"  />
+        <label for="ts-fri-am-radio">AM</label>
+        <input data-theme="c"  type="radio" name="radio-fri" id="ts-fri-pm-radio" value="pm"  />
+        <label for="ts-fri-pm-radio">PM</label>                
+        <a href="#" data-theme="c" id="radio-fri" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Delete</a>
+      </fieldset>      
+    </div> 
+    
+    <div data-role="collapsible" data-theme="b" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+      <h3>Show Weekend</h3>
+      <div data-role="fieldcontain">
+      <fieldset data-theme="c"  data-role="controlgroup" data-type="horizontal">
+        <legend>Saturday</legend>
+        <input data-theme="c"  type="radio" name="radio-sat" id="ts-sat-full-radio" value="full"  />
+        <label for="ts-sat-full-radio">Full</label>
+        <input data-theme="c"  type="radio" name="radio-sat" id="ts-sat-am-radio" value="am"  />
+        <label for="ts-sat-am-radio">AM</label>
+        <input data-theme="c"  type="radio" name="radio-sat" id="ts-sat-pm-radio" value="pm"  />
+        <label for="ts-sat-pm-radio">PM</label>                
+        <a href="#" data-theme="c" id="radio-sat" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Delete</a>
+      </fieldset>      
+    </div> 
+
+    <div data-role="fieldcontain">
+      <fieldset data-theme="c"  data-role="controlgroup" data-type="horizontal">
+        <legend>Sunday</legend>
+        <input data-theme="c"  type="radio" name="radio-sun" id="ts-sun-full-radio" value="full"  />
+        <label for="ts-sun-full-radio">Full</label>
+        <input data-theme="c"  type="radio" name="radio-sun" id="ts-sun-am-radio" value="am"  />
+        <label for="ts-sun-am-radio">AM</label>
+        <input data-theme="c"  type="radio" name="radio-sun" id="ts-sun-pm-radio" value="pm"  />
+        <label for="ts-sun-pm-radio">PM</label>                
+        <a href="#" data-theme="c" id="radio-sun" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Delete</a>
+      </fieldset>      
+    </div> 
+    </div>
+
+    <div class="ui-grid-a">
+      <div class="ui-block-a"><a href="#" id="ts-cancel-btn" data-theme="c" data-role="button" data-icon="delete">Cancel</a></div>
+     <div class="ui-block-b"><a href="#" id="ts-preview-btn" data-theme="b" data-role="button" data-icon="check">Preview</a></div>    
+   </div>
+ </form>
+ <script>
+    $( "#create-ts-form a" ).bind( "click", function(event, ui) {
+      event.preventDefault();
+      var radioId = "[name="+$(this).attr('id')+"]";
+      $(radioId).removeAttr("checked").checkboxradio("refresh");;      
+      return false;
+     });   
+     $( "#ts-preview-btn" ).bind( "click", function(event, ui) {
+      event.preventDefault();
+       $.mobile.changePage('timesheet-preview.html', {
+          transition: "none"
+        });    
+      return false;
+     });   
+ </script>
+</div>
+</div>
+</body>
+</html>
