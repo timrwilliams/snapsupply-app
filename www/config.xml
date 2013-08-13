@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "org.coenraets.employeedirectory"
-        versionCode="10"
-        version   = "1.1.0">
+        id        = "com.teachmatic.snapsupply"
+        versionCode="1"
+        version   = "0.1">
 
     <!-- versionCode is optional and Android only -->
 
-    <name>Employee Directory</name>
+    <name>SnapSupply</name>
 
     <description>
-        A simple employee directory application
+        Easily manage your supply agency work with our integrated app and online portal.
     </description>
 
-    <author href="http://coenraets.org" email="ccoenraets@gmail.com">
-        Christophe Coenraets
+    <author href="http://teachmatic.com" email="tim@teachmatic.com">
+        Tim Williams
     </author>
     <preference name="DisallowOverscroll" value="true" />
     <preference name="UIWebViewBounce" value="false" />

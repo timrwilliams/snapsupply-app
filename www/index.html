@@ -61,6 +61,7 @@ $(document).bind("mobileinit", function(){
 <script src="lib/bootstrap.min.js"></script>
 <script src="lib/countdown.min.js"></script>
 <script src="lib/moment.min.js"></script>
+<script src="js/helpers.js"></script>
 <script src="js/LoginView.js"></script>
 <script src="js/AvailabilityView.js"></script>
 <script src="js/TimesheetsView.js"></script>
@@ -145,8 +146,13 @@ $(document).on("pageinit", function(event, ui) {
     var availability = new AvailabilityView();
     availability.postRender();
 });
- $( document ).delegate("#timesheet-preview-page", "pageinit", function() {
-    var preview = new TimesheetPreviewView();
+ $( document ).delegate("#timesheet-preview-page", "pageinit", function() {    
+    var preview = new TimesheetPreviewView();    
+});
+  $( document ).delegate("#timesheet-weekly-page", "pageinit", function() {
+   if(tsForm.days){
+          tsForm.days = {};
+  }
 });
  $(document).delegate( "#select-la-widget","pageinit",  function( e ) {
     $('#la-list a').on('click', function(e) {
