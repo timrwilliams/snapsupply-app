@@ -31,5 +31,10 @@ var TimesheetCreator = function() {
 		return false;
      }
 
+     this.submit = function () {
+     	console.log("Submitting...");
+     	console.log(tsForm);
+     }
+
      this.initialize();
 }

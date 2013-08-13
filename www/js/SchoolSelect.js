@@ -1,257 +1,39 @@
 var SchoolSelect = function() {
+  $("#school-list").on("listviewbeforefilter", function(e,data) {
+    var $ul = $( this ),
+    $input = $( data.input ),
+    html ="",
+    value = $input.val();
+    $ul.html( "" );
 
-   var sugList = $("#school-list");
-  var fullList = ["Albourne CofE Primary School, Albourne, Nr Hassocks",
-"Aldingbourne Primary School, Westergate",
-"All Saints CofE Primary, Horsham",
-"Amberley CofE First School, Amberley",
-"Arundel CofE Primary School, Arundel",
-"Arunside School, Horsham",
-"Ashington CofE First School, Ashington",
-"Ashurst CofE Primary School, Steyning",
-"Ashurst Wood Primary School, Ashurst Wood",
-"Balcombe CofE Controlled Primary School, Balcombe",
-"Baldwins Hill Primary School, East Grinstead",
-"Barnham Primary School, Barnham",
-"Bartons Infant School, Bognor Regis",
-"Bewbush Academy, Crawley",
-"Billingshurst Infant School, Billingshurst",
-"Billingshurst Junior School, Billingshurst",
-"Birchwood Grove Community Primary School, Burgess Hill",
-"Birdham CofE Primary School, Birdham",
-"Bishop Tufnell CofE Infant School, Felpham",
-"Bishop Tufnell CofE Junior School, Felpham",
-"Blackthorns Community Primary School, Lindfield",
-"Blackwell Primary School, East Grinstead",
-"Bognor Regis Nursery School, Bognor Regis",
-"Bolney CofE Primary School, Bolney",
-"Bosham Primary School, Bosham",
-"Boundstone Nursery School, Lancing",
-"Boxgrove CofE Primary School, Boxgrove",
-"Bramber First School, Worthing",
-"Broadfield East Infant School and Nursery, Crawley",
-"List of schools in Crawley, West Sussex,Broadfield East Junior School, Crawley",
-"Brook School, The, Crawley",
-"Buckingham Park Primary School, Shoreham-by-Sea",
-"Bury CofE First School, Bury",
-"Camelsdale First School, Camelsdale",
-"Castlewood Primary School, Southwater",
-"Central C of E Junior School, Chichester",
-"Chichester Nursery School, Chichester",
-"Chidham Parochial Primary School, Chidham",
-"Clapham and Patching CofE Primary School, Clapham",
-"Colgate Primary School, Colgate",
-"Compton and Up Marden CofE Primary School, Compton",
-"Copthorne CofE Junior School, Copthorne",
-"Crawley Down Village CofE School, Crawley Down",
-"Desmond Anderson Primary School, Crawley",
-"Discovery Free School, Crawley",
-"Downview Primary School, Felpham",
-"Duncton CofE Junior School, Petworth",
-"Durrington First School, Durrington",
-"Easebourne CofE Primary School, Easebourne",
-"East Preston Infant School, East Preston",
-"East Preston Junior School, East Preston",
-"East Wittering Community Primary School, East Wittering",
-"Eastbrook Primary School, Portslade & Southwick",
-"Eastergate CofE Primary School, Eastergate",
-"Edward Bryant Primary School, Bognor Regis",
-"Elm Grove First School, Worthing",
-"English Martyrs Catholic Primary School, Durrington",
-"Estcots Primary School, East Grinstead",
-"Fairway Infant School, Copthorne",
-"Fernhurst Primary School, Fernhurst",
-"Ferring CofE Primary School, Ferring",
-"Field Place First School, Worthing",
-"Fishbourne CofE Primary School, Fishbourne",
-"Fittleworth CofE First School, Fittleworth",
-"Funtington Primary School, West Ashling",
-"Gattons Infant School, The, Burgess Hill",
-"Georgian Gardens Community Primary School, Rustington",
-"Glebe Primary School, The, Southwick",
-"Globe Primary School, The, Lancing",
-"Goring-by-Sea CofE First School, Goring-by-Sea",
-"Gossops Green Primary School, Crawley",
-"Graffham Infant School, Graffham",
-"Greenway Academy, Horsham",
-"Halsford Park Primary School, East Grinstead",
-"Handcross Primary School, Handcross",
-"Harlands Primary School, Haywards Heath",
-"Harting CofE First School, South Harting",
-"Hassocks Infant School, Hassocks",
-"Hawthorns First School, Durrington",
-"Heene CofE First School, Worthing",
-"Heron Way Primary School, Horsham",
-"Heyworth Primary School, Haywards Heath",
-"Hilltop Primary School, Crawley",
-"Holbrook Primary School, Horsham",
-"Hollycombe Primary School, Liphook",
-"Holmbush Primary School, Shoreham-by-Sea",
-"Holy Trinity CofE Primary School, Cuckfield",
-"Holy Trinity CofE Primary School, Lower Beeding",
-"Horsham Nursery School, Horsham",
-"Itchingfield Primary School, Itchingfield",
-"Jessie Younghusband Primary School, Chichester",
-"Jolesfield CofE Primary School, Partridge Green",
-"Kingsham Primary School, Chichester",
-"Kingslea Primary School, Horsham",
-"Laburnum Grove Junior School, Bognor Regis",
-"Lancastrian Infants' School, Chichester",
-"Langley Green Primary School, Crawley",
-"Laurels First School, The, Worthing",
-"Lavant CofE Primary School, Lavant",
-"Leechpool Primary School, Horsham",
-"Lindfield Primary School, Lindfield",
-"Littlehaven Infant School, Horsham",
-"London Meed Community Primary School, Burgess Hill",
-"Loxwood Primary School, Loxwood",
-"Lyminster Primary School, Wick[note 8]",
-"Lyndhurst First School, Worthing",
-"Maidenbower Infant School, Crawley",
-"Maidenbower Junior School, Crawley",
-"Manor Field Primary School, Burgess Hill",
-"March CofE Primary School, Westhampnett",
-"Meads Primary School, The, East Grinstead",
-"Medmerry Primary School, Selsey",
-"Midhurst CofE Primary School, Midhurst",
-"Mill Primary School, Crawley",
-"Milton Mount Primary School, Crawley",
-"North Heath Community Primary School, Horsham",
-"North Lancing Primary School, Lancing",
-"North Mundham Primary School, Chichester",
-"Northchapel Community Primary School, Northchapel",
-"Northgate Primary School, Crawley",
-"Northlands Wood Community Primary School, Haywards Heath",
-"Northolmes Junior School, Horsham",
-"Nyewood CofE Infant School, Bognor Regis",
-"Nyewood CofE Junior School, Bognor Regis",
-"Oaks Primary School, The, Crawley",
-"Our Lady Queen of Heaven Catholic Primary School, Crawley",
-"Parklands Community Primary School, Chichester",
-"Petworth CofE Primary School, Petworth",
-"Plaistow and Kirdford Primary School, Plaistow",
-"Portfield Community Primary School, Chichester",
-"Pound Hill Infant School, Crawley",
-"Pound Hill Junior School, Crawley",
-"Rake CofE Primary School, Liss",
-"River Beach Primary School Littlehampton[note 9]",
-"Rogate CofE Primary School, Rogate",
-"Rose Green Infant School, Rose Green",
-"Rose Green Junior School, Rose Green",
-"Rudgwick Primary School, Rudgwick",
-"Rumboldswhyke CofE Infants' School, Chichester",
-"Rusper Primary School, Rusper",
-"Rustington Community Primary School, Rustington",
-"St Andrew's CofE Primary School, Crawley",
-"St Andrew's CofE Primary School, Nuthurst",
-"St Andrew's CofE Primary School, Steyning",
-"St Augustine's CofE Primary School, Scaynes Hill",
-"St Catherine's Catholic Primary School, Littlehampton",
-"St Francis of Assisi Catholic Primary School, Crawley",
-"St Giles CofE Primary School, Horsted Keynes",
-"St James' CofE Primary School, Coldwaltham",
-"St John the Baptist CofE Primary School, Findon",
-"St John's Catholic Primary School, Horsham",
-"St Joseph's Catholic Primary School, Haywards Heath",
-"St Lawrence C.E. Primary School, Hurstpierpoint",
-"St Margaret's CofE Primary School, Angmering",
-"St Margaret's CofE Primary School, Crawley",
-"St Mark's CofE Primary School, Haywards Heath",
-"St Mary's Catholic Primary School, Bognor Regis",
-"St Mary's Catholic Primary School, Worthing",
-"St Mary's CofE First School, Washington",
-"St Mary's CofE Primary School, Climping",
-"St Mary's CofE Primary School, East Grinstead",
-"St Mary's CofE Primary School, Horsham",
-"St Mary's CofE Primary School, Pulborough",
-"St Mark's CofE Primary School, Staplefield",
-"St Nicolas and St Mary CofE Primary School, Shoreham-by-Sea",
-"St Peter's Catholic Primary School, East Grinstead",
-"St Peter's Catholic Primary School, Shoreham-by-Sea",
-"St Peter's CofE Primary School, Ardingly",
-"St Peter's CofE Primary School, Cowfold",
-"St Peter's CofE Primary School, Henfield",
-"St Philip's Catholic Primary School, Arundel",
-"St Richard's Catholic Primary School, Chichester",
-"St Robert Southwell Catholic Primary School, Horsham",
-"St Wilfrid's Catholic Primary School, Angmering",
-"St Wilfrid's Catholic Primary School, Burgess Hill",
-"St Wilfrid's Church of England School, Haywards Heath",
-"Seal Primary School, Selsey",
-"Seaside Primary School, Lancing",
-"Seymour Primary School, Crawley",
-"Sheddingdean Community Primary School, Burgess Hill",
-"Shelley Primary School, Broadbridge Heath, Horsham",
-"Shipley CofE Primary School, Shipley",
-"Shoreham Beach Primary School, Shoreham-by-Sea",
-"Sidlesham Primary School, Sidlesham",
-"Singleton CofE Primary School, Singleton, West Sussex",
-"Slindon CofE Primary School, Slindon",
-"Slinfold CofE Primary School, Slinfold",
-"Sompting Village Primary School, Sompting",
-"South Bersted CofE Primary School, South Bersted",
-"Southbourne Infant School, Southbourne",
-"Southbourne Junior School, Southbourne",
-"Southgate Primary School, Crawley",
-"Southwater Infant School, Southwater",
-"Southwater Junior School, Southwater",
-"Southway Junior School, Burgess Hill",
-"Southway Primary School, Bognor Regis",
-"Springfield First School, Worthing",
-"Stedham Primary School, Stedham",
-"Storrington First School, Storrington",
-"Summerlea Community Primary School, Rustington",
-"Swiss Gardens Primary School, Shoreham-by-Sea",
-"Tangmere Primary School, Tangmere",
-"Thakeham First School, Thakeham",
-"Thomas A Becket First School, Worthing",
-"Thorney Island Community Primary School, Thorney Island",
-"Three Bridges Infant School, Crawley",
-"Three Bridges Junior School, Crawley",
-"Trafalgar Community Infant School, Horsham",
-"Turners Hill CofE Primary School, Turners Hill",
-"Twineham CofE Primary School, Twineham",
-"Upper Beeding Primary School, Upper Beeding",
-"Walberton and Binsted CofE Primary School, Arundel",
-"Warnham CofE Primary School, Warnham",
-"Warninglid Primary School, Warninglid",
-"Waterfield Primary School, Crawley",
-"West Chiltington Community First School, West Chiltington",
-"West Dean C.E. Primary School, West Sussex",
-"West Green Primary School, Crawley",
-"West Hoathly CofE Primary School, West Hoathly",
-"West Wittering Parochial CofE School, West Wittering",
-"Westbourne Primary School, Westbourne",
-"White Meadows Primary School, Littlehampton[note 10]",
-"Whytemead First School, Worthing",
-"William Penn School, Horsham",
-"Windmills Junior School, Hassocks",
-"Wisborough Green Primary School, Wisborough Green",
-"Yapton CofE Primary School, Yapton"];
-
-  $("#searchField").on("input", function(e) {
-    var text = $(this).val();
-    if(text.length < 1) {
-      sugList.html("");
-      sugList.listview("refresh");
-    } else {
-      var res = fullList.filter(function(val) {
-        return val.toLowerCase().indexOf(text) !== -1;
-      });
-        var str = "";
-        for(var i=0, len=res.length; i<len; i++) {
-          str += "<li><a href=\"#\">"+res[i]+"</a></li>";
+    if ( value && value.length > 2 ) {
+          $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
+          $ul.listview( "refresh" );
+          $.ajax({
+            url: "http://lvh.me:3000/employers/typeahead.jsonp",
+            dataType: "jsonp",
+            crossDomain: true,
+            data: {
+              query: $input.val()
+            }
+          })
+          .then( function ( response ) {
+            $.each( response.options, function ( i, val ) {
+              html += "<li><a href=\"#"+val.id+ "\">" + val.label + "</a></li>";
+            });
+            $ul.html( html );
+            $('#school-list a').on('click', function(e) {
+              e.preventDefault();
+              tsForm.selectedSchool = this.text;
+              tsForm.selectedSchoolId = $(this).prop("hash").substring(1);
+              $.mobile.changePage('timesheet-create.html', {
+                reverse: false, changeHash: false,transition: "none"
+              });
+            });
+            $ul.listview( "refresh" );
+            $ul.trigger( "updatelayout");
+          });
         }
-        sugList.html(str);
-        sugList.listview("refresh");
-         $('#school-list a').on('click', function(e) {
-      e.preventDefault();
-        tsForm.selectedSchool = this.text
-        $.mobile.changePage('timesheet-create.html', {
-          reverse: false, changeHash: false,transition: "none"
-        });
-    });
-    }
   });    
 
 };

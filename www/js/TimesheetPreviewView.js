@@ -16,6 +16,7 @@ var TimesheetPreviewView = function() {
 
      this.onCreate = function(event, ui) {
 		event.preventDefault();
+        new TimesheetCreator().submit();
 		console.log("Moving to success page");
        	$.mobile.changePage('timesheet-submitted.html', {
           transition: "none"

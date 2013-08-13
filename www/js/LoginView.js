@@ -19,10 +19,7 @@ var LoginView = function(store) {
     
     this.login = function(event, ui) {
         console.log('Signing in...');
-        console.log($('input[name="email"]'));
-        console.log($('input[name="password"]'));
         event.preventDefault();
-        //$('.login-btn').button('loading');
         $('.alert').hide();
         $.ajax({
 		    url: 'http://snapsupply.herokuapp.com/users/sign_in.jsonp',
@@ -45,7 +42,6 @@ var LoginView = function(store) {
                 $.mobile.changePage("home.html", { reverse: false, changeHash: false, transition: "fade"});
 		    },
 		    error: function(x, t, m){
-		     //   $('.login-btn').button('reset');
 		        $(".alert").show();
 	    	}
 	    });
