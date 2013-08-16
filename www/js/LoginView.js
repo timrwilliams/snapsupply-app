@@ -13,7 +13,6 @@ var LoginHelper = function() {
 var LoginView = function(store) {
 
     this.initialize = function() {
-        this.el = $('<div/>');
         $( "#login_button" ).bind( "click", this.login);
     };
     
@@ -39,7 +38,7 @@ var LoginView = function(store) {
                 localStorage.setItem('username', data.username);
                 localStorage.setItem('user_diary', data.diary_id);
                 console.log("re-routing");
-                $.mobile.changePage("home.html", { reverse: false, changeHash: false, transition: "fade"});
+                $.mobile.changePage("index.html", { reverse: false, changeHash: false, transition: "fade"});
 		    },
 		    error: function(x, t, m){
 		        $(".alert").show();

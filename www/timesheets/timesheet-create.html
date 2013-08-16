@@ -12,6 +12,11 @@
   </header>
   <div data-role="content">
    <form id="create-ts-form">
+    <div id="agency-field" style="display:none" data-role="fieldcontain">
+      <label for="select-agency" class="select">Agency:</label>
+      <select data-theme="b" name="select-agency" id="select-agency">        
+      </select>
+    </div>
     <div data-role="fieldcontain">
       <label for="school">School:</label>
       <input data-theme="b" type="text" name="school" id="school-select"/>
@@ -43,9 +48,17 @@
  </form>
  <script>
     $('#la-select').val(tsForm.selectedLa);
-    $('#school-select').val(tsForm.selectedSchool);
+    $('#school-select').val(tsForm.school);
     var radioId = '#'+tsForm.typeId;
     $(radioId).attr('checked', 'checked');
+
+     $("#select-agency").bind( "change", function(event, ui) {
+        var str = "";
+        $( "#select-agency option:selected" ).each(function() {
+          tsForm.clientId = $( this ).val();
+          tsForm.clientName = $( this ).text();
+    });
+     });   
  </script>
 </div>
 </div>

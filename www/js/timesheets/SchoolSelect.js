@@ -10,7 +10,7 @@ var SchoolSelect = function() {
           $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
           $ul.listview( "refresh" );
           $.ajax({
-            url: "http://lvh.me:3000/employers/typeahead.jsonp",
+            url: getBaseUrl()+"/employers/typeahead.jsonp",
             dataType: "jsonp",
             crossDomain: true,
             data: {
@@ -24,8 +24,9 @@ var SchoolSelect = function() {
             $ul.html( html );
             $('#school-list a').on('click', function(e) {
               e.preventDefault();
-              tsForm.selectedSchool = this.text;
-              tsForm.selectedSchoolId = $(this).prop("hash").substring(1);
+              tsForm.school = this.text;
+              tsForm.schoolId = $(this).prop("hash").substring(1);
+              console.log("Changing back to creation page...");
               $.mobile.changePage('timesheet-create.html', {
                 reverse: false, changeHash: false,transition: "none"
               });

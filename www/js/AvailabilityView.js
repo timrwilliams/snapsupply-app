@@ -1,8 +1,6 @@
     var selectedDates = new Array();
     var LS_CALENDAR_KEY = 'calendar.dates';
     var LS_PENDING_KEY = 'calendar.pending';
-    //var baseUrl = "http://localhost:3000";
-    var baseUrl = "http://snapsupply.herokuapp.com";
 
 var AvailabilityView = function() {
 
@@ -77,7 +75,7 @@ var AvailabilityView = function() {
         }
         packaged_data.entries = entries;
         $.ajax({
-            url: baseUrl+'/diaries/2/diary_entries/sync.jsonp',
+            url: getBaseUrl()+'/diaries/2/diary_entries/sync.jsonp',
             dataType: 'jsonp',
             jsonp: 'callback',
             crossDomain: true,
@@ -238,7 +236,7 @@ var AvailabilityView = function() {
     function dateSync(){
         diaryId = localStorage.getItem('user_diary');
         $.ajax({
-                url: baseUrl+'/diaries/'+diaryId+'/diary_entries.jsonp',
+                url: getBaseUrl()+'/diaries/'+diaryId+'/diary_entries.jsonp',
                 dataType: 'jsonp',
                 jsonp: 'callback',
                 crossDomain: true,

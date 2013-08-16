@@ -1,5 +1,6 @@
-var TimesheetPreviewView = function() {
-    var daysOfWeek=new Array("monday","tuesday","wednesday","thursday","friday","saturday","sunday");
+var daysOfWeek=new Array("monday","tuesday","wednesday","thursday","friday","saturday","sunday");
+
+var TimesheetPreviewView = function() {    
 
 	this.initialize = function() {
         $( "#ts-pv-submit-btn" ).bind( "click", this.onCreate);
@@ -14,19 +15,31 @@ var TimesheetPreviewView = function() {
         $("#data-preview").listview('refresh');
     };
 
-     this.onCreate = function(event, ui) {
-		event.preventDefault();
-        new TimesheetCreator().submit();
-		console.log("Moving to success page");
-       	$.mobile.changePage('timesheet-submitted.html', {
+    var onSuccess  = function(createdId){
+        console.log("Moving to success page");
+        selectedTimesheetId= createdId;
+        $.mobile.changePage('timesheet.html', {
           transition: "none"
         });    
+    };
+
+    var onFailure = function(){
+        alert("Unable to create timesheet");
+    };
+
+     this.onCreate = function(event, ui) {
+		event.preventDefault();
+        createdId = new TimesheetCreator().submit(onSuccess,onFailure);		
 		return false;
      }
 
      this.onCancel = function(event, ui) {
 		event.preventDefault();
 		console.log("Cancelling timesheet...");
+        resetFormData();
+        $.mobile.changePage('../index.html', {
+          transition: "none"
+        });
 		return false;
      }
 
