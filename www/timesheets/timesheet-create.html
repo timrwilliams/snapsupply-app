@@ -21,7 +21,7 @@
       <label for="school">School:</label>
       <input data-theme="b" type="text" name="school" id="school-select"/>
     </div>
-    <div data-role="fieldcontain">
+    <div id="week-div" data-role="fieldcontain">
       <label for="select-choice-1" class="select">Week:</label>
       <select data-theme="b" name="select-choice-1" id="select-choice-1">
         <option value="standard">June 30 - July 06</option>
@@ -46,7 +46,7 @@
      <div class="ui-block-b"><a href="#" id="ts-create-btn" data-theme="b" data-role="button" data-icon="plus">Create</a></div>    
    </div>        
  </form>
- <script>
+ <script>    
     $('#la-select').val(tsForm.selectedLa);
     $('#school-select').val(tsForm.school);
     var radioId = '#'+tsForm.typeId;

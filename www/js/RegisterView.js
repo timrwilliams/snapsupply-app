@@ -1,33 +1,15 @@
-var LoginHelper = function() {
-
-    this.isLoggedIn = function(){
-        console.log("Auth token: "+localStorage.getItem('auth_token'));
-        if(!localStorage.getItem('auth_token')) {
-            return false;
-        }
-        return true;
-    };    
-
-    this.signOut = function(){
-        console.log("Signing out...");
-        localStorage.removeItem('auth_token');
-        $.mobile.changePage("login.html", { reverse: false, changeHash: false, transition: "none"});
-    }
-
-};
-
-var LoginView = function(store) {
+var RegisterView = function(store) {
 
     this.initialize = function() {
-        $( "#login_button" ).bind( "click", this.login);
+        $( "#register_button" ).bind( "click", this.register);
     };
     
-    this.login = function(event, ui) {
-        console.log('Signing in...');
+    this.register = function(event, ui) {
+        console.log('Registering new user...');
         event.preventDefault();
         $('.alert').hide();
         $.ajax({
-		    url: getBaseUrl()+'/users/sign_in.jsonp',
+		    url: getBaseUrl()+'/users/create.jsonp',
 		    dataType: 'jsonp',
             jsonp: 'callback',
             crossDomain: true,
@@ -35,11 +17,15 @@ var LoginView = function(store) {
 		    data : {
                 user : {
             	    email : $('input[name="email"]').val(), //,"tim@teachmatic.com"
-            		password : $('input[name="password"]').val()//"12345678"
+            		password : $('input[name="password"]').val(),//"12345678"
+                    password_confirmation : $('input[name="password"]').val(),//"12345678"
+                    first_name : $('input[name="first_name"]').val(),//"12345678"
+                    last_name : $('input[name="last_name"]').val()
             		}
             },
 		    success: function(data, status) {
-			    $('.login-btn').button('reset');
+			    $('.register-btn').button('reset');
+                console.log(data);
                 localStorage.setItem('auth_token', data.auth_token);
                 localStorage.setItem('username', data.username);
                 localStorage.setItem('user_diary', data.diary_id);

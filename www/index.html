@@ -1,95 +1,99 @@
 <html>
 <head>
-    <script src="css/source-sans-pro.js"></script>
-    <link href="css/jquery.datepick.css" rel="stylesheet">
+  <script src="css/source-sans-pro.js"></script>
+  <link href="css/jquery.datepick.css" rel="stylesheet">
 
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/jquery.mobile-1.3.1.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
-    <meta charset="utf-8">
-          <style>
-        .modalWindow{
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            z-index: 1500;
-            background: white;
-            opacity: 0.7;
-        }
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/jquery.mobile-1.3.1.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+  <meta charset="utf-8">
+  <style>
+    .modalWindow{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 1500;
+      background: white;
+      opacity: 0.7;
+    }
 
-        .ui-loader{
-            z-index: 1501;
-        }
-        </style>
+    .ui-loader{
+      z-index: 1501;
+    }
+  </style>
 </head>
 <body>
-    <div data-theme="a" data-role="page" id="home">
+  <div data-theme="a" data-role="page" id="home">
     <div data-theme="a" data-role="header" data-position="fixed">
-        <h1>
-            SnapSupply
-        </h1>
-        <i id="header-spinner" style="display:none" class="icon-spinner icon-2x icon-spin ui-btn-right"></i>
+      <h1>
+        SnapSupply
+      </h1>
+      <i id="header-spinner" style="display:none" class="icon-spinner icon-2x icon-spin ui-btn-right"></i>
     </div>
     <div data-role="content">
-    <div id="home-info-bar" class="ui-bar ui-bar-b" style="display:none">
-      <h3>Unable to link you with any agencies. Please check your internet connection and try again or click Help for more assistance.</h3>
+      <div id="home-info-bar" class="ui-bar ui-bar-b" style="display:none">
+        <h3>Unable to link you with any agencies. Please check your internet connection and try again or click Help for more assistance.</h3>
+      </div>
+      <ul data-role="listview" data-divider-theme="b" data-inset="true">
+        <li style="display:none;" data-feature="availability" data-theme="c">
+          <a href="availability.html" data-transition="none">
+            My Availability
+          </a>
+        </li>
+        <li style="display:none;" data-feature="timesheets" data-theme="c">
+          <a href="timesheets/timesheets.html" data-transition="none">
+            My Timesheets
+          </a>
+        </li>
+        <li style="display:none;" data-feature="timesheets" data-theme="c">
+          <a href="timesheets/timesheet-create.html" data-transition="slide">
+            Create Timesheet
+          </a>
+        </li>
+        <li data-theme="c">
+          <a href="help.html" data-transition="slide">
+            Help
+          </a>
+        </li>
+        <li data-theme="c">
+        <a href="settings.html" data-transition="slide">
+            Settings
+          </a>
+        </li>
+      </ul>
     </div>
-        <ul data-role="listview" data-divider-theme="b" data-inset="true">
-            <li style="display:none;" data-feature="availability" data-theme="c">
-                <a href="availability.html" data-transition="none">
-                    My Availability
-                </a>
-            </li>
-            <li style="display:none;" data-feature="timesheets" data-theme="c">
-                <a href="timesheets/timesheets.html" data-transition="none">
-                    My Timesheets
-                </a>
-            </li>
-            <li style="display:none;" data-feature="timesheets" data-theme="c">
-                <a href="timesheets/timesheet-create.html" data-transition="slide">
-                    Create Timesheet
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="help.html" data-transition="slide">
-                    Help
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#home" data-transition="slide">
-                    Settings
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+  </div>
 <script type="text/javascript">// <![CDATA[
-if (navigator.userAgent.toLowerCase().match(/android/)) {
+  if (navigator.userAgent.toLowerCase().match(/android/)) {
     document.write('<script charset="utf-8" src="cordova-2.7.0-android.js"><\/script>');
-}
-else if (navigator.userAgent.toLowerCase().match(/iphone/) || navigator.userAgent.toLowerCase().match(/ipad/)) {
+  }
+  else if (navigator.userAgent.toLowerCase().match(/iphone/) || navigator.userAgent.toLowerCase().match(/ipad/)) {
     document.write('<script charset="utf-8" src="cordova/cordova-2.7.0-ios.js"><\/script>');
-}
+  }
 // ]]>
 </script>
 <script src="lib/jquery-1.8.2.min.js"></script>
 <script>
-$(document).bind("mobileinit", function(){
-  $.mobile.defaultPageTransition = 'none';
-  $.mobile.buttonMarkup.hoverDelay = 0;
-});
+  $(document).bind("mobileinit", function(){
+    $.mobile.defaultPageTransition = 'none';
+    $.mobile.buttonMarkup.hoverDelay = 0;
+  });
 </script>
 <script src="lib/jquery.mobile-1.3.1.min.js"></script>
 <script src="lib/jquery.datepick.js"></script>
 <script src="lib/bootstrap.min.js"></script>
 <script src="lib/countdown.min.js"></script>
 <script src="lib/moment.min.js"></script>
+<script src="lib/energize.min.js"></script>
 <script src="lib/localstoragedb.js"></script>
 <script src="js/helpers.js"></script>
 <script src="js/LoginView.js"></script>
+<script src="js/RegisterView.js"></script>
+<script src="js/AgencySelectionView.js"></script>
 <script src="js/AvailabilityView.js"></script>
 <script src="js/PreferenceService.js"></script>
+<script src="js/SettingsView.js"></script>
 <script src="js/timesheets/TimesheetsView.js"></script>
 <script src="js/timesheets/SchoolSelect.js"></script>
 <script src="js/timesheets/TimesheetBasicWeeklyView.js"></script>
@@ -97,9 +101,7 @@ $(document).bind("mobileinit", function(){
 <script src="js/timesheets/TimesheetStore.js"></script>
 <script src="js/timesheets/TimesheetPreviewView.js"></script>
 <script type="text/javascript">
-/**
- * @author: Chris Hjorth, www.chrishjorth.com
- */
+
  var jqmReady = $.Deferred();
  var pgReady = $.Deferred();
  var browser = false;
@@ -111,162 +113,188 @@ $(document).bind("mobileinit", function(){
  var selectedTimesheetId = -1;
 
  function resetFormData() {
-    return { selectedLa: null,type:"basic_weekly",typeId:"ts-weekly-radio" }
- }
- var tsForm = resetFormData();
+  return { selectedLa: null,type:"basic_weekly",typeId:"ts-weekly-radio" }
+};
+var tsForm = resetFormData();
+var config = {
+  development: {
+    host:'http://api.lvh.me:3000'
+  },
+  production:{
+    host:'http://api.snapsupply.co.uk'
+  }
+};
 
- var app = {
+var app = {
+
    //Callback for when the app is ready
    callback: null,
    // Application Constructor
    initialize: function(callback) {
-      this.callback = callback;
-      browser = document.URL.match(/^https?:/);
-      if(browser) {
-       console.log("Is web.");
+    this.callback = callback;
+    browser = document.URL.match(/^https?:/);
+    if(browser) {
+     console.log("Is web.");
          //In case of web we ignore PG but resolve the Deferred Object to trigger initialization
          pgReady.resolve();
-     }
-     else {
-       console.log("Is not web.");
-       this.bindEvents();
-   }
-},
-bindEvents: function() {
-  document.addEventListener('deviceready', this.onDeviceReady, false);
-},
-onDeviceReady: function() {
+       }
+       else {
+         console.log("Is not web.");
+         this.bindEvents();
+       }
+     }  
+
+     ,
+     bindEvents: function() {
+      document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    onDeviceReady: function() {
       // The scope of 'this' is the event, hence we need to use app.
       app.receivedEvent('deviceready');
       document.addEventListener("backbutton", onBackKeyDown, false);      
-  },
-  receivedEvent: function(event) {
+    },
+    receivedEvent: function(event) {
       switch(event) {
        case 'deviceready':
        pgReady.resolve();
        break;
+     }
    }
-}
-};
-$(document).on("pageinit", function(event, ui) {
- jqmReady.resolve();
-});
+ };
+ $(document).on("pageinit", function(event, ui) {
+   jqmReady.resolve();
+ });
 /**
  * General initialization.
  */
  $.when(jqmReady, pgReady).then(function() {
    //Initialization code here
    if(app.callback) {
-      app.callback();
+    app.callback();
   }
   console.log("Frameworks ready.");   
 
 });
  $( document ).delegate("#home", "pageinit", function() {    
-    tsForm = resetFormData();
-    if(!login.isLoggedIn()){
-        console.log("Redirecting to login page");  
+  tsForm = resetFormData();
+  if(!login.isLoggedIn()){
+    console.log("Redirecting to login page");  
         /*if(browser){
             $('#hidden-home-link').show();    
         }
         else{*/
-            $.mobile.changePage("login.html", { reverse: false, changeHash: false,transition: "fade"});
+          $.mobile.changePage("login.html", { reverse: false, changeHash: false,transition: "fade"});
         //}        
-    }
+      }
+    });
+ //Bind events required on every page
+ $(document).delegate('.ui-page', 'pageshow', function () {  
+    $('a[data-rel="back"]').live('tap',onBackKeyDown).live('click',onBackKeyDown);
 });
  $( document ).delegate("#home", "pageshow", function() {
-    if(startup && login.isLoggedIn()){
-      prefs = new PreferenceService();
-      prefs.initialize();
-      startup = false;
-    }    
-    else if (login.isLoggedIn()){
-      prefs.enableFeatures();
-    }
-});
- $( document ).delegate("#login-page", "pageinit", function() {
-    var login = new LoginView();
-    login.postRender();
-});
- $( document ).delegate("#availability-page", "pageinit", function() {
-  $('a[data-rel="back"]').live('tap',onBackKeyDown).live('click',onBackKeyDown)
-    var availability = new AvailabilityView();
-    availability.postRender();
-});
- $( document ).delegate("#timesheet-preview-page", "pageinit", function() {    
-  $('a[data-rel="back"]').live('tap',onBackKeyDown).live('click',onBackKeyDown)
-    var preview = new TimesheetPreviewView();    
-});
-  $( document ).delegate("#timesheet-weekly-page", "pageinit", function() {
-    $('a[data-rel="back"]').live('tap',onBackKeyDown).live('click',onBackKeyDown)
-   if(tsForm.days){
-          tsForm.days = {};
+  if(startup && login.isLoggedIn()){
+    prefs = new PreferenceService();
+    prefs.initialize();
+    startup = false;
+  }    
+  else if (login.isLoggedIn()){
+    prefs.enableFeatures();
   }
 });
-  $( document ).delegate("#timesheet-page", "pageinit", function() {
-    $('a[data-rel="back"]').live('tap',onBackKeyDown).live('click',onBackKeyDown)
-    var timesheet = tsStore.findByExternalId(selectedTimesheetId);
-    var timesheetView = new TimesheetBasicWeeklyView( timesheet[0]); 
-    selectedTimesheetId = -1;
-  });
-$(document).delegate( "#timesheets-page","pageinit",  function( e ) {    
-    console.log("init timesheets page");
-    $('a[data-rel="back"]').live('tap',onBackKeyDown).live('click',onBackKeyDown)
-    var tsView = new TimesheetsView();
-   }); 
+ $( document ).delegate("#login-page", "pageinit", function() {
+  var login = new LoginView();
+  login.postRender();
+});
+  $( document ).delegate("#register-page", "pageinit", function() {
+  var register = new RegisterView();
+});
+  $( document ).delegate("#agency-selection-page", "pageinit", function() {
+    var agency = new AgencySelectionView();
+    agency.initialize();
+});
+ $( document ).delegate("#availability-page", "pageinit", function() {
+  var availability = new AvailabilityView();
+  availability.postRender();
+});
+ $( document ).delegate("#timesheet-preview-page", "pageinit", function() {    
+  var preview = new TimesheetPreviewView();    
+});
+ $( document ).delegate("#timesheet-weekly-page", "pageinit", function() {
+  if(tsForm.days){
+    tsForm.days = {};
+  }
+});
+ $( document ).delegate("#timesheet-page", "pageinit", function() {
+  var timesheet = tsStore.findByExternalId(selectedTimesheetId);
+  var timesheetView = new TimesheetBasicWeeklyView( timesheet[0]); 
+  selectedTimesheetId = -1;
+});
+ $(document).delegate( "#timesheets-page","pageinit",  function( e ) {      
+  var tsView = new TimesheetsView();
+}); 
+ $(document).delegate( "#help-page","pageinit",  function( e ) {    
+}); 
+ $(document).delegate( "#settings-page","pageinit",  function( e ) {    
+  var settings = new SettingsView();
+}); 
  $(document).delegate( "#timesheet-create-page","pageinit",  function( e ) {
-  $('a[data-rel="back"]').live('tap',onBackKeyDown).live('click',onBackKeyDown)
-   var tsCreator = new TimesheetCreator();
- $(document).delegate( "#school-select","focus",  function( e ) {  
-    console.log("Got focus on the school select");
+  console.log("Focusing away from school select");
+  $('#week-div').focus();
+  var tsCreator = new TimesheetCreator();
+  $(document).delegate( "#school-select","focus",  function( e ) {  
+    if(event.handled !== true){
+      console.log("Got focus on the school select");
       $.mobile.changePage("select-school.html", { reverse: false, changeHash: false,transition: "none"});
-  });
-});
-  $( document ).delegate("#select-school-widget", "pageinit", function() {     
-   schoolSelect = new SchoolSelect();
-});
-
-  function onBackKeyDown() {
-    console.log("Custom back button behaviour");
-    var prevPage="";
-    if($.mobile.urlHistory.getPrev()){
-      var prevPagePath = $.mobile.urlHistory.getPrev().hash;
-      if(prevPagePath){
-        var pieces = prevPagePath.split("/");
-        if(pieces.length>0){
-          prevPage = pieces[pieces.length-1];
-          console.log(prevPagePath);
-        }        
-      }
-    }
-    if($.mobile.activePage.is('#home')){
-      navigator.app.exitApp();
-    }
-    else if(prevPage=="timesheet-preview.html"){
-      console.log("Detected end of create timesheet wizard path. Returning to index.");
-      $.mobile.changePage("../index.html");
-    }
-    else{
-      history.back();
+      event.handled = true;
     }
     return false;
-  };
+  });
+});
+ $( document ).delegate("#select-school-widget", "pageinit", function() {     
+  schoolSelect = new SchoolSelect();
+});
 
- app.initialize(function() {
-    console.log("App is ready");
- });
+ function onBackKeyDown(event) {
+  event.preventDefault();
+  console.log("Back button pressed");
+  var prevPage="";
+  if($.mobile.urlHistory.getPrev()){
+    var prevPagePath = $.mobile.urlHistory.getPrev().hash;
+    if(prevPagePath){
+      var pieces = prevPagePath.split("/");
+      if(pieces.length>0){
+        prevPage = pieces[pieces.length-1];
+      }        
+    }
+  }
+  if($.mobile.activePage.is('#home')){
+    navigator.app.exitApp();
+  }
+  else if(prevPage=="timesheet-preview.html"){
+    console.log("Detected end of create timesheet wizard path. Returning to index.");
+    $.mobile.changePage("../index.html");
+  }
+  else{
+    history.back();
+  }
+  return false;
+};
 
-  
+app.initialize(function() {
+  console.log("App is ready");
+});
 
- function getBaseUrl(){
+
+
+function getBaseUrl(){
   if(browser) {
-    return "http://lvh.me:3000";
- }
- else{
-    return "http://snapsupply.herokuapp.com";
- }
+    return config.development.host;
+  }
+  else{
+    return config.production.host;
+  }
 }
- </script>
+</script>
 
 </body>
 </html>

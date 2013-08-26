@@ -56,8 +56,12 @@ var TimesheetCreator = function() {
 
      this.onCancel = function(event, ui) {
 		event.preventDefault();
-		console.log("Cancelling timesheet...");
-		return false;
+    console.log("Cancelling timesheet...");
+        resetFormData();
+        $.mobile.changePage('../index.html', {
+          transition: "none"
+        });
+    return false;
      }
 
      this.submit = function (successCallback,failureCallback) {
