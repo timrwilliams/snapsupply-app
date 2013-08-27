@@ -91,6 +91,7 @@
 <script src="js/LoginView.js"></script>
 <script src="js/RegisterView.js"></script>
 <script src="js/AgencySelectionView.js"></script>
+<script src="js/AgencySettingsView.js"></script>
 <script src="js/AvailabilityView.js"></script>
 <script src="js/PreferenceService.js"></script>
 <script src="js/SettingsView.js"></script>
@@ -111,7 +112,7 @@
  var tsStore = new TimesheetStore();
  var storage = window.localStorage;
  var selectedTimesheetId = -1;
-
+  var dto = {};
  function resetFormData() {
   return { selectedLa: null,type:"basic_weekly",typeId:"ts-weekly-radio" }
 };
@@ -173,6 +174,10 @@ var app = {
     app.callback();
   }
   console.log("Frameworks ready.");   
+  if(!browser){
+    setTimeout(function(){navigator.splashscreen.hide();},500); 
+    
+  }
 
 });
  $( document ).delegate("#home", "pageinit", function() {    
@@ -211,6 +216,9 @@ var app = {
   $( document ).delegate("#agency-selection-page", "pageinit", function() {
     var agency = new AgencySelectionView();
     agency.initialize();
+});
+  $( document ).delegate("#agency-settings-page", "pageinit", function() {
+    var agencySettings = new AgencySettingsView();
 });
  $( document ).delegate("#availability-page", "pageinit", function() {
   var availability = new AvailabilityView();
