@@ -19,5 +19,6 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="UIWebViewBounce" value="false" />
 
+    <feature name="http://api.phonegap.com/1.0/network"/>
 
 </widget>
