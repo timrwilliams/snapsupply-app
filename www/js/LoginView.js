@@ -59,11 +59,3 @@ var LoginView = function(store) {
     this.initialize();
 
 }
-
-$(function() {
-  $.ajaxSetup({
-    'beforeSend': function(xhr) {
-    xhr.setRequestHeader("accept", "appplication/json");
-    }
-  });
-});

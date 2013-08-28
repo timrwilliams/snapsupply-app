@@ -1,7 +1,8 @@
 var PreferenceService = function() {
 	 var storage = window.localStorage;
 	 var LS_PREFERENCES_KEY = "prefs"
-	 
+	 var DEFAULT_FEATURES = ["help","settings"];
+
 	 this.initialize = function() {	 
 	 	$("ul").listview( "refresh" );
 	 	var inBackground = true;
@@ -18,6 +19,7 @@ var PreferenceService = function() {
 
     this.enableFeatures = function(){
     	console.log("Enabling features");
+      this.enableDefaultFeatures();
     	var clients = this.getLocalPrefs().clients;
     	for(i=0;i<clients.length;i++){
     		var client = clients[i];
@@ -32,6 +34,12 @@ var PreferenceService = function() {
     this.enableFeature = function(feature){
     	console.log("Enabling "+feature);
     	$("ul").find("[data-feature='" + feature + "']").show();
+    }
+
+    this.enableDefaultFeatures = function(){
+        for(j=0;j<DEFAULT_FEATURES.length;j++){
+          this.enableFeature(DEFAULT_FEATURES[j]);
+        }
     }
 
     this.getLocalPrefs = function(){

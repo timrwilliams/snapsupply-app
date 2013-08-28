@@ -51,12 +51,12 @@
             Create Timesheet
           </a>
         </li>
-        <li data-theme="c">
+        <li style="display:none;" data-feature="help" data-theme="c">
           <a href="help.html" data-transition="slide">
             Help
           </a>
         </li>
-        <li data-theme="c">
+        <li style="display:none;" data-feature="settings" data-theme="c">
         <a href="settings.html" data-transition="slide">
             Settings
           </a>
@@ -176,35 +176,39 @@ var app = {
   }
   console.log("Frameworks ready.");   
   if(!browser){
-    setTimeout(function(){navigator.splashscreen.hide();},500); 
-    
+    setTimeout(function(){navigator.splashscreen.hide();},500);     
   }
 
 });
  $( document ).delegate("#home", "pageinit", function() {    
-  tsForm = resetFormData();
-  if(!login.isLoggedIn()){
+  tsForm = resetFormData(); 
+    });
+ //Bind events required on every page
+ $(document).delegate('.ui-page', 'pageshow', function () {  
+  console.log("Registering back button handler");
+    $('a[data-rel="back"]').live('tap',onBackKeyDown).live('click',onBackKeyDown);
+});
+ $( document ).delegate("#home", "pageshow", function() {
+  console.log("Showing Home page");
+   if(!login.isLoggedIn()){
     console.log("Redirecting to login page");  
         /*if(browser){
             $('#hidden-home-link').show();    
         }
         else{*/
-          $.mobile.changePage("login.html", { reverse: false, changeHash: false,transition: "fade"});
+          setTimeout(function(){$.mobile.changePage("login.html", { reverse: false, changeHash: false,transition: "fade"});},250); 
+          //$.mobile.changePage("login.html", { reverse: false, changeHash: false,transition: "fade"});
         //}        
       }
-    });
- //Bind events required on every page
- $(document).delegate('.ui-page', 'pageshow', function () {  
-    $('a[data-rel="back"]').live('tap',onBackKeyDown).live('click',onBackKeyDown);
-});
- $( document ).delegate("#home", "pageshow", function() {
-  if(startup && login.isLoggedIn()){
-    prefs = new PreferenceService();
-    prefs.initialize();
-    startup = false;
-  }    
-  else if (login.isLoggedIn()){
-    prefs.enableFeatures();
+  else{
+    if(startup && login.isLoggedIn()){
+      prefs = new PreferenceService();
+      prefs.initialize();
+      startup = false;
+    }    
+    else if (login.isLoggedIn()){
+      prefs.enableFeatures();
+    }
   }
 });
  $( document ).delegate("#login-page", "pageinit", function() {
@@ -276,7 +280,7 @@ var app = {
       }        
     }
   }
-  if($.mobile.activePage.is('#home')){
+  if($.mobile.activePage.is('#home')||$.mobile.activePage.is('#login-page')){
     navigator.app.exitApp();
   }
   else if(prevPage=="timesheet-preview.html"){
