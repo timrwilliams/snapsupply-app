@@ -51,6 +51,11 @@
             Create Timesheet
           </a>
         </li>
+        <li style="display:none;" data-feature="agency-selection" data-theme="c">
+          <a href="agency-selection.html" data-transition="slide">
+            Add Agency
+          </a>
+        </li>
         <li style="display:none;" data-feature="help" data-theme="c">
           <a href="help.html" data-transition="slide">
             Help
@@ -107,7 +112,7 @@
  var jqmReady = $.Deferred();
  var pgReady = $.Deferred();
  var browser = false;
- var prefs;
+ var prefs = new PreferenceService();  
  var startup = true;
  var login = new LoginHelper();
  var tsStore = new TimesheetStore();
@@ -201,11 +206,16 @@ var app = {
         //}        
       }
   else{
-    if(startup && login.isLoggedIn()){
-      prefs = new PreferenceService();
+    console.log("DTO value",dto.refresh_prefs );
+    if (prefs.shouldRefresh){
+      prefs.shouldRefresh=false;
+      console.log("Triggering a refresh");
+      prefs.hardRefresh();
+    }
+    else if(startup && login.isLoggedIn()){    
       prefs.initialize();
       startup = false;
-    }    
+    }        
     else if (login.isLoggedIn()){
       prefs.enableFeatures();
     }
@@ -216,6 +226,7 @@ var app = {
   login.postRender();
 });
   $( document ).delegate("#register-page", "pageinit", function() {
+    console.log("Register page loading");
   var register = new RegisterView();
 });
   $( document ).delegate("#agency-selection-page", "pageinit", function() {

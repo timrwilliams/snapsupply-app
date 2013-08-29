@@ -1,6 +1,7 @@
 var RegisterView = function(store) {
 
     this.initialize = function() {
+        console.log("Init register");
         $( "#register_button" ).bind( "click", this.register);
     };
     
@@ -45,11 +46,3 @@ var RegisterView = function(store) {
     this.initialize();
 
 }
-
-$(function() {
-  $.ajaxSetup({
-    'beforeSend': function(xhr) {
-    xhr.setRequestHeader("accept", "appplication/json");
-    }
-  });
-});

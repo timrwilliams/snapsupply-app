@@ -2,9 +2,9 @@ var AgencySelectionView = function() {
 
       this.initialize = function() {
         var self = this;
-        $( "#showBtn" ).bind( "click", function(event, ui) {
+        $( "#linkBtn" ).bind( "click", function(event, ui) {
             event.preventDefault();         
-            self.showSelectedNames();
+            self.onLinkButton();
             return false;
         });         
          self.getAvailableAgencies();
@@ -17,15 +17,21 @@ var AgencySelectionView = function() {
          $("#agency-list").append('<fieldset  id="cbFieldSet" data-role="controlgroup">');
          var array = data.unlinked_clients
          var length = array.length;
-         for(var i=0;i<length;i++){
+         if(length==0){
+            $("#agency-info-bar").html("<h3>No eligible agencies available to link with. Please read the Help if this is unexpected.")
+            $("#agency-info-bar").show();
+            $("#home-btn").show();
+         }
+         else{
+          for(var i=0;i<length;i++){
             $("#cbFieldSet").append('<input data-theme="d" type="checkbox" name="cb-'+array[i].id+'" id="cb-'+array[i].id+'" value="'+array[i].name+'"/><label for="cb-'+array[i].id+'">'+array[i].name+'</label>');
          }
-
          $("#agency-list").trigger("create");
-         $("#showBtn").css("visibility","visible");
+         $("#linkBtn").show();
+        }        
         }
 
-        this.showSelectedNames = function(){
+        this.onLinkButton = function(){
             var count = $("#cbFieldSet input:checked").length;            
             var result = [];
             for(i=0;i<count;i++){
@@ -54,7 +60,8 @@ var AgencySelectionView = function() {
             self.createCheckboxes(response);
           })
           .fail( function (){
-              $("#home-info-bar").show();
+              $("#agency-info-bar").html("<h3>Unable to link you with any agencies. Please check your internet connection and try again or click Help for more assistance.</h3>");
+              $("#agency-info-bar").show();
               console.log("Unable to communicate with server at "+url);
           })
           .always( function (){            
@@ -81,6 +88,7 @@ var AgencySelectionView = function() {
             $("#agency-info-bar").html("<h3>Succesfully linked with new agencies.</h3>")                     
             $("#agency-info-bar").show();
             self.getAvailableAgencies();
+            prefs.shouldRefresh = true;
             console.log(response);            
           })
           .fail( function (){

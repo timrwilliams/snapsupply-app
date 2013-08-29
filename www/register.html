@@ -12,9 +12,17 @@
         <div data-role="content">
             <div id="register-container" class="container">
                 <div class="alert alert-error" style="display:none;">
-                    There was an error signing up. Please check your e-mail address and try again.
+                    There was an error signing up. Please check your details and try again.
                 </div>
                 <form id="register_form">
+                    <div data-role="fieldcontain">
+                        <label for="first_name">First Name:</label>
+                        <input data-theme="b" type="text" name="first_name" id="first_name" value="" />
+                    </div>      
+                    <div data-role="fieldcontain">
+                        <label for="last_name">Last Name:</label>
+                        <input data-theme="b" type="text" name="last_name" id="last_name" value="" />
+                    </div>                      
                     <div data-role="fieldcontain">
                         <label for="email">Email:</label>
                         <input data-theme="b" type="email" name="email" id="email" value="" />
@@ -26,16 +34,8 @@
                     <div data-role="fieldcontain">
                         <label for="password_confirmation">Password:</label>
                         <input data-theme="b" type="password" name="password_confirmation" id="password_confirmation" value="" />
-                    </div>      
-                    <div data-role="fieldcontain">
-                        <label for="first_name">First Name:</label>
-                        <input data-theme="b" type="text" name="first_name" id="first_name" value="" />
-                    </div>      
-                    <div data-role="fieldcontain">
-                        <label for="last_name">Last Name:</label>
-                        <input data-theme="b" type="text" name="last_name" id="last_name" value="" />
                     </div>                                              
-                    <a href="#" id="register_button" data-loading-text="Registering..." data-role="button">Register</a>
+                    <a href="#" id="register_button" data-loading-text="Registering..." data-theme="b" data-role="button">Register</a>
                 </form>        
             </div>
         </div>

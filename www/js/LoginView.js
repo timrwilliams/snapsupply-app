@@ -1,8 +1,9 @@
 var LoginHelper = function() {
+    var storage = window.localStorage;
 
     this.isLoggedIn = function(){
-        console.log("Auth token: "+localStorage.getItem('auth_token'));
-        if(!localStorage.getItem('auth_token')) {
+        console.log("Auth token: "+storage.getItem('auth_token'));
+        if(!storage.getItem('auth_token')) {
             return false;
         }
         return true;
@@ -10,7 +11,8 @@ var LoginHelper = function() {
 
     this.signOut = function(){
         console.log("Signing out...");
-        localStorage.removeItem('auth_token');
+        storage.clear();
+        prefs.shouldRefresh= true;
         $.mobile.changePage("login.html", { reverse: false, changeHash: false, transition: "none"});
     }
 
@@ -40,10 +42,11 @@ var LoginView = function(store) {
             },
 		    success: function(data, status) {
 			    $('.login-btn').button('reset');
-                localStorage.setItem('auth_token', data.auth_token);
-                localStorage.setItem('username', data.username);
-                localStorage.setItem('user_diary', data.diary_id);
+                storage.setItem('auth_token', data.auth_token);
+                storage.setItem('username', data.username);
+                storage.setItem('user_diary', data.diary_id);
                 console.log("re-routing");
+                prefs.shouldRefresh= true;
                 $.mobile.changePage("index.html", { reverse: false, changeHash: false, transition: "fade"});
 		    },
 		    error: function(x, t, m){

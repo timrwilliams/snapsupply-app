@@ -2,33 +2,53 @@ var PreferenceService = function() {
 	 var storage = window.localStorage;
 	 var LS_PREFERENCES_KEY = "prefs"
 	 var DEFAULT_FEATURES = ["help","settings"];
+   var shouldRefresh = false;
 
 	 this.initialize = function() {	 
 	 	$("ul").listview( "refresh" );
 	 	var inBackground = true;
         if(this.getLocalPrefs()==null){        	        	
         	inBackground = false;
-        	showModal();
         }        
         else{
-        	showSpinner();
         	this.enableFeatures();
         }   
         this.refreshPreferences(inBackground); 
     };
 
+    this.hardRefresh = function(){
+      this.disableFeatures();
+      this.refreshPreferences(false); 
+    }
+
     this.enableFeatures = function(){
     	console.log("Enabling features");
+      this.disableFeature("agency-selection");
       this.enableDefaultFeatures();
-    	var clients = this.getLocalPrefs().clients;
-    	for(i=0;i<clients.length;i++){
-    		var client = clients[i];
-    		var features = client.features;
-    		for(j=0;j<features.length;j++){    		
-    			this.enableFeature(features[j]);
-    		}
-    	}
+      var prefs = this.getLocalPrefs();
+      if(prefs==null || prefs.clients == null || prefs.clients.length==0){
+        this.enableFeature("agency-selection");
+      }
+      else{
+    	  var clients = prefs.clients;
+    	  for(i=0;i<clients.length;i++){
+    	    var client = clients[i];
+    	    var features = client.features;
+    		  for(j=0;j<features.length;j++){    		
+    			 this.enableFeature(features[j]);
+    		  }
+    	 }
+      }
     	$("ul").listview( "refresh" );
+    }
+
+    this.disableFeatures = function(){
+      $("ul").find("[data-feature]").hide();
+    }
+
+    this.disableFeature = function(feature){
+      console.log("Disabling "+feature);
+      $("ul").find("[data-feature='" + feature + "']").hide();
     }
 
     this.enableFeature = function(feature){
@@ -43,10 +63,22 @@ var PreferenceService = function() {
     }
 
     this.getLocalPrefs = function(){
-    	return JSON.parse(storage.getItem(LS_PREFERENCES_KEY));
+      var prefs = storage.getItem(LS_PREFERENCES_KEY);
+      if(prefs==null){
+        return null;
+      }
+      else{
+    	 return JSON.parse(prefs);
+      }
     }
 
     this.refreshPreferences = function(inBackground){
+      if(inBackground){
+        showSpinner();
+      }
+      else{
+        showModal();
+      }
     	console.log("Refreshing preferences");
     	$("#home-info-bar").hide();
     	var self = this;
@@ -75,7 +107,7 @@ var PreferenceService = function() {
           		hideSpinner();
           	}
           	else{
-          		setTimeout(function(){hideModal()},1000);	
+          		setTimeout(function(){hideModal()},500);	
           	}   
           });
     };
@@ -85,6 +117,9 @@ var PreferenceService = function() {
     };
 
     this.getClients = function(){
+      if(this.getLocalPrefs()==null){
+        return null;      
+      }      
     	return this.getLocalPrefs().clients;
     }
 }
