@@ -74,8 +74,9 @@ var AvailabilityView = function() {
             entries.push(diary_entry);            
         }
         packaged_data.entries = entries;
+        var diary_id = localStorage.getItem('user_diary');
         $.ajax({
-            url: getBaseUrl()+'/diaries/2/diary_entries/sync.jsonp',
+            url: getBaseUrl()+'/diaries/'+diary_id+'/diary_entries/sync.jsonp',
             dataType: 'jsonp',
             jsonp: 'callback',
             crossDomain: true,
@@ -132,7 +133,6 @@ var AvailabilityView = function() {
             addDiaryEntryToLocalStorage(pendingChanges, diaryEntry);
         }        
         console.log("AT END",pendingChanges);   
-
     };
 
     function addDiaryEntryToLocalStorage(pendingChanges, diaryEntry)

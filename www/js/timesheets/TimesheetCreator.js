@@ -8,6 +8,7 @@ var TimesheetCreator = function() {
         	tsForm.typeId = $(this).attr('id');
 		});
 		this.populateAgencyList();
+    this.populateWeekList();
     };
 
     this.populateAgencyList = function(){
@@ -33,6 +34,28 @@ var TimesheetCreator = function() {
     		$("#select-agency").html(options).selectmenu('refresh', true);
     		agencyDiv.show();
     	}
+    }
+
+    this.populateWeekList = function(){
+      var weekDiv = $("#week-div");     
+      var localPrefs = prefs.getLocalPrefs();
+      var time_ranges = localPrefs.time_ranges;
+      var options = "";
+      var selectedHtml = "";
+      if(!time_ranges){
+        options +="<option selected='selected value='-1'>No valid time ranges found.</option>";
+      }
+      else{
+      for(i = 0;i<time_ranges.length;i++){
+        var range =time_ranges[i] 
+        if(range.id==tsForm.timeRangeId){
+          selectedHtml = "selected='selected'";
+        }
+        options +="<option "+selectedHtml+" value='"+range.id+"'>"+range.label+"</option>";
+        selectedHtml = "";
+      }    
+      }  
+      $("#week-select").html(options).selectmenu('refresh', true);
     }
 
     this.setClient = function(name,id){
@@ -71,7 +94,7 @@ var TimesheetCreator = function() {
               client_id: tsForm.clientId,
               employer_id: tsForm.schoolId,
               timesheet_type: tsForm.type,
-              time_range: 27
+              time_range: tsForm.timeRangeId
             };
         for (var i = 0, len = daysOfWeek.length; i < len; i++) {
             var day = daysOfWeek[i];

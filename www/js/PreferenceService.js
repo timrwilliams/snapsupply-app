@@ -91,10 +91,9 @@ var PreferenceService = function() {
               auth_token: storage.getItem('auth_token')
             }
           })
-          .done( function ( response ) {                  	
+          .done( function ( response ) {
           	storage.setItem(LS_PREFERENCES_KEY,JSON.stringify(response));
-          	self.enableFeatures();          	       	
-            console.log(response);
+          	self.enableFeatures();
           })
           .fail( function (){
           	if(!inBackground){

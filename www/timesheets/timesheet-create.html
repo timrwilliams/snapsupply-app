@@ -22,12 +22,8 @@
       <input data-theme="b" type="text" name="school" id="school-select"/>
     </div>
     <div id="week-div" data-role="fieldcontain">
-      <label for="select-choice-1" class="select">Week:</label>
-      <select data-theme="b" name="select-choice-1" id="select-choice-1">
-        <option value="standard">June 30 - July 06</option>
-        <option value="rush">June 23 - June 29</option>
-        <option value="express">June 16 - June 22</option>
-        <option value="overnight">June 09 - June 15</option>
+      <label for="week-select" class="select">Week:</label>
+      <select data-theme="b" name="week-select" id="week-select">
       </select>
     </div>
 
@@ -58,7 +54,14 @@
           tsForm.clientId = $( this ).val();
           tsForm.clientName = $( this ).text();
     });
-     });   
+     });
+    $("#week-select").bind( "change", function(event, ui) {
+        var str = "";
+        $( "#week-select option:selected" ).each(function() {
+          tsForm.timeRangeId = $( this ).val();
+          tsForm.timeRangeName = $( this ).text();
+    });
+     });
  </script>
 </div>
 </div>
