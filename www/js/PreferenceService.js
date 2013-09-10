@@ -1,7 +1,7 @@
 var PreferenceService = function() {
 	 var storage = window.localStorage;
 	 var LS_PREFERENCES_KEY = "prefs"
-	 var DEFAULT_FEATURES = ["help","settings"];
+	 var DEFAULT_FEATURES = ["help","settings","location"];
    var shouldRefresh = false;
 
 	 this.initialize = function() {	 

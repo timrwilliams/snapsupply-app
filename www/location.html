@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+   </head>
+   <body>
+      <div  data-theme="a" id="location-page" data-role="page">
+         <div data-theme="a" data-role="header" data-position="fixed">
+         <a href="#" data-icon="back" data-iconpos="notext" data-rel="back" title="Go back">Back</a>
+        <h1>
+            Update Location
+        </h1>
+    </div>
+    <div data-role="content">    
+      <div id="location-alert" class="alert alert-error" style="display:none;">
+      </div>
+          <div data-role="controlgroup" >
+            <a href="#" id="location-btn" data-theme="b" data-role="button">Update location</a>
+            <select data-theme="c" name="week-select" id="week-select">
+              <option value="1">for 24 hours</option>
+              <option value="2">for 2 days</option>
+              <option value="3">for 3 days</option>
+              <option value="4">for 4 days</option>
+              <option value="5">for 5 days</option>
+              <option value="6">for 6 days</option>
+              <option value="7">for 7 days</option>
+            </select>
+          </div>
+      <img id="map" alt=""/>
+    </div>
+    </div>
+   </body>
+</html>

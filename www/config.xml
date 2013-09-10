@@ -19,6 +19,7 @@
     
     <feature name="http://api.phonegap.com/1.0/device" />    
     <feature name="http://api.phonegap.com/1.0/network"/>
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
 
     <preference name="phonegap-version" value="2.9.0" />
     <preference name="orientation" value="default" />
@@ -55,4 +56,5 @@
 
     <access origin="http://lvh.me:3000*" />
     <access origin="http://api.snapsupply.co.uk*" />
+    <access origin="https://maps.googleapis.com*" />
 </widget>

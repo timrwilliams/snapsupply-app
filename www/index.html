@@ -5,6 +5,7 @@
 
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/jquery.mobile-1.3.1.css" rel="stylesheet">
+  <link href="css/jqm-icon-pack-2.0-original.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
   <meta charset="utf-8">
@@ -51,6 +52,11 @@
             Create Timesheet
           </a>
         </li>
+        <li style="display:none;" data-feature="location" data-theme="c">
+          <a href="location.html" data-transition="slide">
+            Update Your Current Location
+          </a>
+        </li>
         <li style="display:none;" data-feature="agency-selection" data-theme="c">
           <a href="agency-selection.html" data-transition="slide">
             Add Agency
@@ -95,6 +101,7 @@
 <script src="lib/localstoragedb.js"></script>
 <script src="js/helpers.js"></script>
 <script src="js/LoginView.js"></script>
+<script src="js/LocationView.js"></script>
 <script src="js/RegisterView.js"></script>
 <script src="js/AgencySelectionView.js"></script>
 <script src="js/AgencySettingsView.js"></script>
@@ -255,6 +262,9 @@ var app = {
   var tsView = new TimesheetsView();
 }); 
  $(document).delegate( "#help-page","pageinit",  function( e ) {    
+}); 
+  $(document).delegate( "#location-page","pageinit",  function( e ) {    
+    var location = new LocationView();
 }); 
  $(document).delegate( "#settings-page","pageinit",  function( e ) {    
   var settings = new SettingsView();
