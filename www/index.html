@@ -103,6 +103,7 @@
 <script src="js/SettingsView.js"></script>
 <script src="js/timesheets/TimesheetsView.js"></script>
 <script src="js/timesheets/SchoolSelect.js"></script>
+<script src="js/timesheets/TimesheetBasicWeeklyCreator.js"></script>
 <script src="js/timesheets/TimesheetBasicWeeklyView.js"></script>
 <script src="js/timesheets/TimesheetCreator.js"></script>
 <script src="js/timesheets/TimesheetStore.js"></script>
@@ -240,6 +241,7 @@ var app = {
   var preview = new TimesheetPreviewView();    
 });
  $( document ).delegate("#timesheet-weekly-page", "pageinit", function() {
+  var timesheetWeeklyCreator = new TimesheetBasicWeeklyCreator(); 
   if(tsForm.days){
     tsForm.days = {};
   }

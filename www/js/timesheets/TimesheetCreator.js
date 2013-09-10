@@ -45,9 +45,12 @@ var TimesheetCreator = function() {
       if(!time_ranges){
         options +="<option selected='selected value='-1'>No valid time ranges found.</option>";
       }
-      else{
+      else{      
       for(i = 0;i<time_ranges.length;i++){
         var range =time_ranges[i] 
+        if(!tsForm.timeRangeId){
+          this.setTimeRange(range.label, range.id)          
+       }
         if(range.id==tsForm.timeRangeId){
           selectedHtml = "selected='selected'";
         }
@@ -61,6 +64,11 @@ var TimesheetCreator = function() {
     this.setClient = function(name,id){
     	tsForm.clientName = name;
     	tsForm.clientId = id;
+    }
+
+    this.setTimeRange = function(name,id){
+      tsForm.timeRangeName = name;
+      tsForm.timeRangeId = id;
     }
 
      this.onCreate = function(event, ui) {

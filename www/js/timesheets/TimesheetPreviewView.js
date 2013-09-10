@@ -12,6 +12,8 @@ var TimesheetPreviewView = function() {
                 $("#data-preview").append('<li>'+preview+'</li>');
             }
         };
+        $("#preview-employer-label").html(tsForm.school);
+        $("#preview-time-range-label").html(tsForm.timeRangeName);
         $("#data-preview").listview('refresh');
     };
 
