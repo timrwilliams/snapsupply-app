@@ -98,7 +98,6 @@ var TimesheetCreator = function() {
      this.submit = function (successCallback,failureCallback) {
      	console.log("Submitting...");
      	var data = {
-              auth_token: window.localStorage.getItem('auth_token'),
               client_id: tsForm.clientId,
               employer_id: tsForm.schoolId,
               timesheet_type: tsForm.type,
@@ -112,13 +111,7 @@ var TimesheetCreator = function() {
         };
         console.log(data);
         var createdId = -1;
-     	$.ajax({
-            url: getBaseUrl()+"/timesheets/create.jsonp",
-            dataType: "jsonp",
-            crossDomain: true,
-            timeout: 2500,
-            data: data
-          })
+     	  $.ajax(NH.ajaxOptions("/timesheets/create.jsonp",data))
           .done( function(response){
             console.log("Received a response from server");
             console.log(response);

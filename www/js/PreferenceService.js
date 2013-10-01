@@ -81,16 +81,10 @@ var PreferenceService = function() {
       }
     	console.log("Refreshing preferences");
     	$("#home-info-bar").hide();
-    	var self = this;
-		$.ajax({
-            url: getBaseUrl()+"/prefs/index.jsonp",
-            dataType: "jsonp",
-            crossDomain: true,
-            timeout: 2500,
-            data: {
-              auth_token: storage.getItem('auth_token')
-            }
-          })
+    	var self = this;      
+		  $.ajax(
+        NH.ajaxOptions("/prefs/index.jsonp")
+        )
           .done( function ( response ) {
           	storage.setItem(LS_PREFERENCES_KEY,JSON.stringify(response));
           	self.enableFeatures();
@@ -120,6 +114,19 @@ var PreferenceService = function() {
         return null;      
       }      
     	return this.getLocalPrefs().clients;
+    }
+
+    this.updateLocation = function(lat,long,expiry_date){
+      var prefs = this.getLocalPrefs();
+      var location = prefs.location;
+      if(!location){
+        location = {};
+      }
+      location.latitude = lat;
+      location.longitude = long;
+      location.expiry_date = expiry_date;
+      prefs.location = location;
+      storage.setItem(LS_PREFERENCES_KEY,JSON.stringify(prefs));
     }
 }
 

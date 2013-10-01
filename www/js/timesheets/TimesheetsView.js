@@ -47,15 +47,7 @@ var TimesheetsView = function(){
 		console.log("Refreshing timesheets");
 		var self = this;
 		self.showSpinner();
-		$.ajax({
-            url: getBaseUrl()+"/timesheets.jsonp",
-            dataType: "jsonp",
-            crossDomain: true,
-            timeout: 2500,
-            data: {
-              auth_token: storage.getItem('auth_token')
-            }
-          })
+		$.ajax(NH.ajaxOptions("/timesheets.jsonp"))
           .done( function ( response ) {
           	var timesheets = response.timesheets
           	for(i=0;i<timesheets.length;i++){

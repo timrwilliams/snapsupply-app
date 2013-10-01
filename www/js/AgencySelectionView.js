@@ -45,16 +45,8 @@ var AgencySelectionView = function() {
       console.log("Getting agency list");
       var self = this;
       self.showSpinner();
-      var url = getBaseUrl()+"/users/link.jsonp";
-      $.ajax({
-            url: url,
-            dataType: "jsonp",
-            crossDomain: true,
-            timeout: 2500,
-            data: {
-              auth_token: storage.getItem('auth_token')
-            }
-          })
+      var ajaxOptions = NH.ajaxOptions("/users/link.jsonp");
+      $.ajax( ajaxOptions)
           .done( function ( response ) {                          
             console.log(response);
             self.createCheckboxes(response);
@@ -62,7 +54,7 @@ var AgencySelectionView = function() {
           .fail( function (){
               $("#agency-info-bar").html("<h3>Unable to link you with any agencies. Please check your internet connection and try again or click Help for more assistance.</h3>");
               $("#agency-info-bar").show();
-              console.log("Unable to communicate with server at "+url);
+              console.log("Unable to communicate with server at "+ajaxOptions.url);
           })
           .always( function (){            
               setTimeout(function(){self.hideSpinner()},100); 
@@ -74,16 +66,9 @@ var AgencySelectionView = function() {
           self.showSpinner();
           var url = getBaseUrl()+"/users/link.jsonp";
           $("#agency-info-bar").hide();
-          $.ajax({
-            url: url,
-            dataType: "jsonp",
-            crossDomain: true,
-            timeout: 2500,
-            data: {
-              auth_token: storage.getItem('auth_token'),
-              client_ids: client_ids
-            }
-          })
+          var data = { client_ids: client_ids }
+          var ajaxOptions = NH.ajaxOptions("/users/link.jsonp",data);
+          $.ajax( ajaxOptions )
           .done( function ( response ) {     
             $("#agency-info-bar").html("<h3>Succesfully linked with new agencies.</h3>")                     
             $("#agency-info-bar").show();
@@ -93,7 +78,7 @@ var AgencySelectionView = function() {
           })
           .fail( function (){
               $("#agency-info-bar").show();
-              console.log("Unable to communicate with server at "+url);
+              console.log("Unable to communicate with server at "+ajaxOptions.url);
           })
           .always( function (){            
               setTimeout(function(){self.hideSpinner()},100); 

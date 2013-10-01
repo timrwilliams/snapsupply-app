@@ -75,14 +75,9 @@ var AvailabilityView = function() {
         }
         packaged_data.entries = entries;
         var diary_id = localStorage.getItem('user_diary');
-        $.ajax({
-            url: getBaseUrl()+'/diaries/'+diary_id+'/diary_entries/sync.jsonp',
-            dataType: 'jsonp',
-            jsonp: 'callback',
-            crossDomain: true,
-            timeout: 25000,
-            data : packaged_data,
-            success: function(data, status) {
+        var path = '/diaries/'+diary_id+'/diary_entries/sync.jsonp'
+        $.ajax(NH.ajaxOptions(path,packaged_data,{timeout:25000}))
+        .done(function(data, status)  {
                 $('#calendar_status').text("Changes saved");
                 console.log("succesfully saved",data);
                 var length = data.length,
@@ -98,11 +93,11 @@ var AvailabilityView = function() {
                     }
                 }
                 flagSyncComplete();
-            },
-            error: function(){
+            })
+            .fail( function() {
                 $('#calendar_status').text("Problem saving dates, please try again");
             }
-        });
+            );
     
     };
 
@@ -234,25 +229,18 @@ var AvailabilityView = function() {
     }
 
     function dateSync(){
-        diaryId = localStorage.getItem('user_diary');
-        $.ajax({
-                url: getBaseUrl()+'/diaries/'+diaryId+'/diary_entries.jsonp',
-                dataType: 'jsonp',
-                jsonp: 'callback',
-                crossDomain: true,
-                timeout: 25000,
-                data : {
-                     auth_token : localStorage.getItem('auth_token')
-                 },
-                success: function(data, status) {
+        var diaryId = localStorage.getItem('user_diary');
+        var path = '/diaries/'+diaryId+'/diary_entries.jsonp';
+        $.ajax(NH.ajaxOptions(path,{},{timeout:25000}))
+        .done(function(data, status) {
                    console.log("succesfully retrieved json");
                    console.log(data.entries);
                    updateLocal(data.entries);
-                },
-                error: function(){
+                })
+        .fail( function(){
                 	$('#calendar_status').text("Problem syncing data, please try again.");
                 }
-            });
+            );
     };
 
     function loadDates(){        
