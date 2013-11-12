@@ -28,7 +28,7 @@
   <div data-theme="a" data-role="page" id="home">
     <div data-theme="a" data-role="header" data-position="fixed">
       <h1>
-        SnapSupply
+        <span data-replace="true" id="companyName">{companyName}</span>
       </h1>
       <i id="header-spinner" style="display:none" class="icon-spinner icon-2x icon-spin ui-btn-right"></i>
     </div>
@@ -85,13 +85,44 @@
 // ]]>
 </script>
 <script src="lib/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script src="js/NetworkHelper.js"></script>
 <script>
+  var deviceReadyDeferred = $.Deferred();
+  var jqmReadyDeferred = $.Deferred();
+  var browser = false;
+ if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+        document.addEventListener("deviceReady", deviceReady, false);
+    } else {
+        deviceReady();
+    }
+
+
+function deviceReady() {
+  console.log("Device is ready");
+  deviceReadyDeferred.resolve();
+}
+
   $(document).bind("mobileinit", function(){
+    console.log("JQM is ready");
+    jqmReadyDeferred.resolve();
     $.mobile.defaultPageTransition = 'none';
     $.mobile.buttonMarkup.hoverDelay = 0;
   });
+
+$.when(deviceReadyDeferred, jqmReadyDeferred).then(doWhenBothFrameworksLoaded);
+
+function doWhenBothFrameworksLoaded() {
+  browser = document.URL.match(/^https?:/);
+  console.log("App is ready");
+   if(!browser){    
+    if(navigator.splashscreen){
+      console.log("Hiding splashscreen");
+      setTimeout(function(){navigator.splashscreen.hide();},500);
+    }
+  }
+}
 </script>
-<script type="text/javascript" src="cordova.js"></script>
 <script src="lib/jquery.mobile-1.3.1.min.js"></script>
 <script src="lib/jquery.datepick.js"></script>
 <script src="lib/bootstrap.min.js"></script>
@@ -100,6 +131,8 @@
 <script src="lib/energize.min.js"></script>
 <script src="lib/localstoragedb.js"></script>
 <script src="js/helpers.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/properties/topteachers.js"></script>
 <script src="js/LoginView.js"></script>
 <script src="js/LocationView.js"></script>
 <script src="js/RegisterView.js"></script>
@@ -107,7 +140,6 @@
 <script src="js/AgencySettingsView.js"></script>
 <script src="js/AvailabilityView.js"></script>
 <script src="js/PreferenceService.js"></script>
-<script src="js/NetworkHelper.js"></script>
 <script src="js/SettingsView.js"></script>
 <script src="js/timesheets/TimesheetsView.js"></script>
 <script src="js/timesheets/SchoolSelect.js"></script>
@@ -117,22 +149,7 @@
 <script src="js/timesheets/TimesheetStore.js"></script>
 <script src="js/timesheets/TimesheetPreviewView.js"></script>
 <script type="text/javascript">
-
- var jqmReady = $.Deferred();
- var pgReady = $.Deferred();
- var browser = false;
- var prefs = new PreferenceService();  
- var startup = true;
- var login = new LoginHelper();
- var tsStore = new TimesheetStore();
-  var storage = window.localStorage;
- var selectedTimesheetId = -1;
-  var dto = {};
- function resetFormData() {
-  return { selectedLa: null,type:"basic_weekly",typeId:"ts-weekly-radio" }
-};
-var tsForm = resetFormData();
-var config = {
+ var config = {
   development: {
     host:'http://api.lvh.me:3000'
   },
@@ -140,75 +157,39 @@ var config = {
     host:'http://api.snapsupply.co.uk'
   }
 };
-var app = {
+ var prefs = new PreferenceService();  
+ var startup = true;
+ var login = new LoginHelper();
+ var tsStore = new TimesheetStore();
+ var storage = window.localStorage;
+ var selectedTimesheetId = -1;
+  var dto = {};
+  window.NH = new NetworkHelper(getBaseUrl());
+ function resetFormData() {
+  return { selectedLa: null,type:"basic_weekly",typeId:"ts-weekly-radio" }
+};
+var tsForm = resetFormData();
 
-   //Callback for when the app is ready
-   callback: null,
-   // Application Constructor
-   initialize: function(callback) {
-    this.callback = callback;
-    browser = document.URL.match(/^https?:/);
-    if(browser) {
-     console.log("Is web.");
-         //In case of web we ignore PG but resolve the Deferred Object to trigger initialization
-         pgReady.resolve();
-       }
-       else {
-         console.log("Is not web.");
-         this.bindEvents();
-       }
-     }  
-
-     ,
-     bindEvents: function() {
-      document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    onDeviceReady: function() {
-      // The scope of 'this' is the event, hence we need to use app.
-      console.log("Registering back button");
-      app.receivedEvent('deviceready');
-      document.addEventListener("backbutton", onBackKeyDown, false);      
-    },
-    receivedEvent: function(event) {
-      switch(event) {
-       case 'deviceready':
-       pgReady.resolve();
-       break;
-     }
-   }
- };
- $(document).on("pageinit", function(event, ui) {
-   jqmReady.resolve();
- });
-/**
- * General initialization.
- */
- $.when(jqmReady, pgReady).then(function() {
-   //Initialization code here
-   if(app.callback) {
-    app.callback();
-  } 
-});
- $( document ).delegate("#home", "pageinit", function() {    
+$( document ).delegate("#home", "pageinit", function() {
   tsForm = resetFormData(); 
-    });
- //Bind events required on every page
- $(document).delegate('.ui-page', 'pageshow', function () {  
-  console.log("Registering back button handler");
-    $('a[data-rel="back"]').live('tap',onBackKeyDown).live('click',onBackKeyDown);
 });
- $( document ).delegate("#home", "pageshow", function() {
+
+$(document).delegate('.ui-page', 'pagebeforeshow', function () {  
+  replaceStrings();
+});
+
+ //Bind events required on every page
+$(document).delegate('.ui-page', 'pageshow', function () {  
+  console.log("Registering back button handler");  
+  $('a[data-rel="back"]').unbind().one('tap',onBackKeyDown).one('click',onBackKeyDown);
+});
+
+$( document ).delegate("#home", "pageshow", function() {
   console.log("Showing Home page");
-   if(!login.isLoggedIn()){
+  if(!login.isLoggedIn()){
     console.log("Redirecting to login page");  
-        /*if(browser){
-            $('#hidden-home-link').show();    
-        }
-        else{*/
-          setTimeout(function(){$.mobile.changePage("login.html", { reverse: false, changeHash: false,transition: "fade"});},250); 
-          //$.mobile.changePage("login.html", { reverse: false, changeHash: false,transition: "fade"});
-        //}        
-      }
+    setTimeout(function(){$.mobile.changePage("login.html", { reverse: false, changeHash: false,transition: "fade"});},250); 
+  }
   else{
     console.log("DTO value",dto.refresh_prefs );
     if (prefs.shouldRefresh){
@@ -286,7 +267,19 @@ var app = {
   schoolSelect = new SchoolSelect();
 });
 
+ function replaceStrings(){
+  console.log("Replacing strings");
+  replacements = $("body").find("[data-replace]");
+  for(i = 0; i < replacements.size();i++){
+    id = replacements[i].id;
+    replacement = i18n.prop(id);    
+    node = replacements.eq( i );
+    node.html(replacement);
+  }  
+ }
+
  function onBackKeyDown(event) {
+  console.log($._data( $(this)[0], "events" ));
   event.preventDefault();
   console.log("Back button pressed");
   var prevPage="";
@@ -312,19 +305,6 @@ var app = {
   return false;
 };
 
-app.initialize(function() {
-  console.log("App is ready");
-  window.NH = new NetworkHelper(getBaseUrl());
-   if(!browser){
-    console.log("Hiding splashscreen");
-    if(navigator.splashscreen){
-      setTimeout(function(){navigator.splashscreen.hide();},500);
-    }
-  }
-});
-
-
-
 function getBaseUrl(){
   if(browser) {
     return config.development.host;
@@ -333,6 +313,7 @@ function getBaseUrl(){
     return config.production.host;
   }
 }
+
 </script>
 
 </body>

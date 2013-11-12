@@ -14,7 +14,7 @@ var SettingsView = function() {
                 html += "<li data-theme='c'><a class='concrete-agency' href='agency-settings.html#"+i+"'>"+clients[i].name+"</a></li>";
             }
         }
-        html += "<li data-theme='b'><a href='agency-selection.html' id='agency_selection_button' >Add Agency</a></li>";
+        //html += "<li data-theme='b'><a href='agency-selection.html' id='agency_selection_button' >Add Agency</a></li>";
         $ul = $("#agency-settings-list");
         $ul.html(html);
         $('#agency-settings-list a.concrete-agency').on('click', function(e) {

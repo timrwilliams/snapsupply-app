@@ -1,0 +1,5 @@
+node bin\setup_client.js
+
+#From C:\dev\projects\snapsupply-app\gen\topteachers\platforms\android\bin
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore "C:\Users\Tim\Google Drive\Keystore\teachmatic.keystore" SnapSupply-release-unsigned.apk teachmatic
+zipalign -v 4 SnapSupply-release-unsigned.apk topteachers-release.apk

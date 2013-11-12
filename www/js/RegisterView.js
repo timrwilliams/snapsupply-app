@@ -9,6 +9,7 @@ var RegisterView = function(store) {
         console.log('Registering new user...');
         event.preventDefault();
         $('.alert').hide();
+        clientId = i18n.prop('clientId');
         $.ajax({
 		    url: getBaseUrl()+'/users/create.jsonp',
 		    dataType: 'jsonp',
@@ -22,7 +23,8 @@ var RegisterView = function(store) {
                     password_confirmation : $('input[name="password"]').val(),//"12345678"
                     first_name : $('input[name="first_name"]').val(),//"12345678"
                     last_name : $('input[name="last_name"]').val()
-            		}
+            	},
+                client_id : clientId
             },
 		    success: function(data, status) {
 			    $('.register-btn').button('reset');
