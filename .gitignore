@@ -22,7 +22,6 @@ android/*.iml
 android/out/
 
 # generated files
-bin/
 gen/
 platforms/
 plugins/
