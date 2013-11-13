@@ -27,6 +27,8 @@ platforms/
 plugins/
 # Local configuration file (sdk path, etc)
 local.properties
+.done
+*.log
 
 # IOS / Xcode
 build/*
