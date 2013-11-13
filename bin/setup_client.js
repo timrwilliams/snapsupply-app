@@ -32,7 +32,7 @@ function copy_client_assets(client){
     shell.cp( "-Rf", rootdir + "/.cordova" , clientroot + "/");
     shell.cp( "-Rf", rootdir + "/merges" , clientroot + "/");
     shell.cp( "-Rf", rootdir + "/www" , clientroot + "/");
-    shell.cp( "-Rf", rootdir + "/platforms" , clientroot + "/");
+    shell.exec( "cp -Rf " + rootdir + "/platforms " + clientroot + "/");
     shell.cp( "-Rf", rootdir + "/plugins" , clientroot + "/");
     shell.cp( "-Rf", client_asset_dir + "/www/config.xml" , clientroot + "/www/config.xml");
     shell.rm( "-Rf", clientroot + "/platforms/android/src/com/teachmatic");
