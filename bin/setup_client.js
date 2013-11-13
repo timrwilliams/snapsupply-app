@@ -7,7 +7,7 @@ var path = require( "path" ),
 function copy_client_assets(client){
     setup_android(rootdir);
     setup_ios(rootdir);
-    setup_plugins(rootdir);
+    setup_plugins(rootdir); 
     var client_dir = "";
     if(client){
         console.log("Building for client: "+client);
@@ -47,13 +47,14 @@ function setup_plugins(rootdir){
     pluginroot = rootdir + "/plugins";
     plugins = ["geolocation","console","splashscreen"];
     for (i = 0;i<plugins.length;i++){
-        plugindir = pluginroot + "/" + plugins[i]; 
+        plugin_package = "org.apache.cordova."+plugins[i];
+        plugindir = pluginroot + "/" + plugin_package; 
         try {
             fs.lstatSync( plugindir ).isDirectory();
         }
         catch( e ) {    
             console.log( plugins[i] + " plugin does not exist yet. Adding..." );
-            shell.exec("cordova plugin add org.apache.cordova."+plugins[i]);
+            shell.exec("cordova plugin add " + plugin_package);
         }
     }
 }
